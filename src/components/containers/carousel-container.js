@@ -16,8 +16,13 @@ class CarouselComponent extends Component {
 };
 
 function mapStateToProps(state) {
+  const cpArticles = [];
+  state.carouselState.map(article => {
+    cpArticles.push(Object.assign({}, article));
+  });
+
   return {
-    articles: [].concat(state.carouselState)
+    articles: cpArticles
   }; 
 }
 
