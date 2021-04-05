@@ -1,0 +1,27 @@
+import { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Route, Switch } from 'react-router-dom';
+
+// Route-specific layouts
+import Home from '../home';
+
+// Layout-specific components
+import NavigationBar from '../containers/navigation-container';
+import Footer from '../containers/footer-container';
+
+export default class MainLayout extends Component {
+  static propTypes = {  
+  }
+
+  render() {
+    return (
+      <>
+        <NavigationBar />
+        <Switch>
+          <Route path="/" component={Home} />
+        </Switch>
+        <Footer />
+      </>
+    );
+  }
+}

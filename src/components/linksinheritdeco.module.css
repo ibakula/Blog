@@ -1,0 +1,4 @@
+.removeDecorations, .removeDecorations:hover, .removeDecorations:active, .removeDecorations:link {
+  color: inherit;
+  text-decoration: none;
+}
