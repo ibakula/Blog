@@ -7,7 +7,7 @@
   top: -30%;
 }
 
-.carouselRuleset {
+.carouselRuleset, .carouselItemRuleset {
   height: 300px;
   background-color: #e3e3e3;
 }

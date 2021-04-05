@@ -13,7 +13,7 @@ export default class CarouselView extends Component {
       <Carousel className={style.carouselRuleset} controls={false} interval={5000} pause={'hover'} slide={true}>
         {this.props.articles.map(article => {
           return (
-            <Carousel.Item className={style.carouselRuleset}>
+            <Carousel.Item className={style.carouselItemRuleset}>
               <img className={"d-block " + style.imgRuleset} src={article.img} />
               <Carousel.Caption>
                 <h3 className={"h1 " + style.textRuleset}>{article.title}</h3>
