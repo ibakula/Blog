@@ -1,0 +1,24 @@
+.imgRuleset {
+  max-width: 80%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  position:relative;
+  top: -30%;
+}
+
+.carouselRuleset {
+  height: 300px;
+  background-color: #e3e3e3;
+}
+
+.textRuleset {
+  display: block;
+  background-color: #000000a1;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 15em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

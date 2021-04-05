@@ -2,7 +2,7 @@ import * as actionTypes from '../actions/action-types';
 
 const initialState = {
   results: []
-}
+};
 
 function searchReducer(state = initialState, action) {
   switch(action.type) {

@@ -1,6 +1,6 @@
 import { Component } from 'react';
-import { Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import Carousel from './containers/carousel-container';
 
 export default class Home extends Component {
   static propTypes = {
@@ -8,11 +8,9 @@ export default class Home extends Component {
 
   render() {
     return (
-      <Row>
-        <Col>
-          
-        </Col>
-      </Row>
+      <>
+        <Carousel />
+      </>
     );
   }
 };
