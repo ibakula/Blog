@@ -7,7 +7,7 @@ const initialState = {
 function searchReducer(state = initialState, action) {
   switch(action.type) {
     case actionTypes.DISPLAY_RESULTS:
-      return Object.create({}, state, { results: action.results });
+      return Object.assign({}, state, { results: action.results });
     
     case actionTypes.INIT_SEARCH_FN:
       return initialState;
