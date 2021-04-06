@@ -1,5 +1,6 @@
 import { Card, Row, Col } from 'react-bootstrap';
 import style from './article.module.css';
+import PopularSection from './popular-articles-view';
 
 export default function ArticleView(props) {
   return (
@@ -15,29 +16,7 @@ export default function ArticleView(props) {
         </Card>
       </Col>
       <Col md={4}>
-        <Row>
-          <Card.Body className="pt-3 pb-0">
-            <Card.Title className="lead font-italic">Most popular</Card.Title>
-          </Card.Body>
-        </Row>
-        <Row>
-          <Card border="light">
-            <Card.Body>
-              <Card.Title>Some title..</Card.Title>
-              <Card.Text>Added some text to see the results</Card.Text>
-              <Card.Link href="/article/5">Read more...</Card.Link>
-            </Card.Body>
-          </Card>
-        </Row>
-        <Row>
-          <Card border="light">
-            <Card.Body>
-              <Card.Title>Some title..</Card.Title>
-              <Card.Text>Added some text to see the results</Card.Text>
-              <Card.Link href="/article/5">Read more..</Card.Link>
-            </Card.Body>
-          </Card>
-        </Row>
+        <PopularSection />
       </Col>
     </Row>
   );
