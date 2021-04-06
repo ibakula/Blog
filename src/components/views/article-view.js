@@ -16,6 +16,11 @@ export default function ArticleView(props) {
       </Col>
       <Col md={4}>
         <Row>
+          <Card.Body className="pt-3 pb-0">
+            <Card.Title className="lead font-italic">Most popular</Card.Title>
+          </Card.Body>
+        </Row>
+        <Row>
           <Card border="light">
             <Card.Body>
               <Card.Title>Some title..</Card.Title>
