@@ -4,3 +4,8 @@
   width: auto;
   float: left;
 }
+
+.textRuleset {
+  max-height: 10em;
+  overflow: hidden;
+}
