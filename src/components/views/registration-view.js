@@ -1,10 +1,33 @@
 import { Row, Col, Form, Button } from 'react-bootstrap';
+import style from './formRules.module.css';
 
 export default function RegistrationView(props) {
   return (
-    <Row>
-      <Col>
-        <p>Test!</p>
+    <Row noGutters={true} className="mt-sm-5 mt-3 pl-sm-5 pl-3">
+      <Col md={8}>
+        <h3>Registration form:</h3>
+        <Form className="ml-3">
+          <Form.Group>
+            <Form.Label>First name:</Form.Label>
+            <Form.Control type="text" placeholder="Your first name" className={style.rectifyFormCtrlItem} />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Last name</Form.Label>
+            <Form.Control type="text" placeholder="Your last name, surname or family name" className={style.rectifyFormCtrlItem} />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>E-mail address</Form.Label>
+            <Form.Control type="email" placeholder="E-mail address" className={style.rectifyFormCtrlItem} />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="password" placeholder="Desired password" className={style.rectifyFormCtrlItem} />
+          </Form.Group>
+          <Button variant="primary">Sign up!</Button>
+        </Form>
+      </Col>
+      <Col md={4}>
+        {props.children}
       </Col>
     </Row>
   );
