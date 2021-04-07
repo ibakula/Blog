@@ -10,6 +10,7 @@ import NavigationBar from '../containers/navigation-container';
 import Footer from '../containers/footer-container';
 import Login from './login-layout';
 import Registration from './registration-layout';
+import Profile from './profile-layout';
 
 export default class MainLayout extends Component {
   static propTypes = {  
@@ -23,6 +24,8 @@ export default class MainLayout extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Registration} />
+          <Route exact path="/profile" component={Profile} />
+          <Route path="/profile/:userId" component={Profile}/>
         </Switch>
         <Footer />
       </>
