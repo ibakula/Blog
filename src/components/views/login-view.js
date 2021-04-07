@@ -3,9 +3,10 @@ import style from './formRules.module.css';
 
 export default function LoginView(props) {
   return (      
-    <Row noGutters={true} className="mt-5 pl-5 pr-5">
+    <Row noGutters={true} className="mt-sm-5 mt-3 pl-sm-5 pl-3">
       <Col md={8}>
-        <Form>
+        <h3>User log-in:</h3>
+        <Form className="ml-3">
           <Form.Group controlId="loginFormEmail">
             <Form.Label>User E-mail address:</Form.Label>
             <Form.Control className={style.rectifyFormCtrlItem} type="email" placeholder="E-mail address" />
