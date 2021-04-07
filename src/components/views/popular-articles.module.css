@@ -1,0 +1,19 @@
+.limitImgSize {
+  max-width: 16em;
+  height: auto;
+}
+
+.textBoundaries {
+  overflow: hidden;
+  word-wrap: break-word;
+  hyphens: auto;
+  max-width: 15em;
+  max-height: 7.3em;
+}
+
+.titleBoundaries {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 16em;
+}
