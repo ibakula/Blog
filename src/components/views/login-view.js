@@ -3,7 +3,7 @@ import style from './formRules.module.css';
 
 export default function LoginView(props) {
   return (      
-    <Row className="mt-5 pl-3 pr-3">
+    <Row noGutters={true} className="mt-5 pl-5 pr-5">
       <Col md={8}>
         <Form>
           <Form.Group controlId="loginFormEmail">
