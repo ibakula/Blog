@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import style from './subscription.module.css';
+import style from './formRules.module.css';
 import { Row, Col, Button, Form } from 'react-bootstrap';
 
 export default function SubscriptionView(props) {
@@ -9,7 +9,7 @@ export default function SubscriptionView(props) {
         <Col xs={"auto"}>
           <h3 className="display-5">Subscribe to our content:</h3>
           <Form>
-            <Form.Group controlId="subscriptionForm">
+            <Form.Group controlId="subscriptionFormEmail">
               <Form.Label class="lead">E-mail address:</Form.Label>
               <Form.Control type="email" placeholder="E-mail" className={style.rectifyFormCtrlItem} />
             </Form.Group>
