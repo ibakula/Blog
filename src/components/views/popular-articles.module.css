@@ -15,5 +15,5 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  max-width: 16em;
+  max-width: 14em;
 }
