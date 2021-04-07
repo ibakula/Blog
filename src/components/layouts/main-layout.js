@@ -9,6 +9,7 @@ import Home from '../home';
 import NavigationBar from '../containers/navigation-container';
 import Footer from '../containers/footer-container';
 import Login from './login-layout';
+import Registration from './registration-layout';
 
 export default class MainLayout extends Component {
   static propTypes = {  
@@ -21,6 +22,7 @@ export default class MainLayout extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Registration} />
         </Switch>
         <Footer />
       </>
