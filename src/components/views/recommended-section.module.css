@@ -1,0 +1,17 @@
+.articleRuleset {
+  width: 20em;
+}
+
+.titleRuleset {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 15em;
+}
+
+.textRuleset {
+  overflow: hidden;
+  max-width: 15em;
+  max-height: 6em;
+  word-break: break-all;
+}
