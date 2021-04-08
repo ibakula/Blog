@@ -8,7 +8,7 @@ export default class ArticleLayout extends Component {
   render() {
     return (
       <>
-        <WelcomeStripeContainer />
+        {localStorage.getItem("email") != null && <WelcomeStripeContainer />}
         <ArticleContainer />
         <RecommendedSectionContainer />
         <CommentSectionContainer />
