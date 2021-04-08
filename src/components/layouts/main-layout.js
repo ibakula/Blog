@@ -11,6 +11,7 @@ import Footer from '../containers/footer-container';
 import Login from './login-layout';
 import Registration from './registration-layout';
 import Profile from './profile-layout';
+import Article from './article-layout';
 
 export default class MainLayout extends Component {
   static propTypes = {  
@@ -26,6 +27,7 @@ export default class MainLayout extends Component {
           <Route exact path="/register" component={Registration} />
           <Route exact path="/profile" component={Profile} />
           <Route path="/profile/:userId" component={Profile}/>
+          <Route path="/article/:articleId" component={Article} />
         </Switch>
         <Footer />
       </>
