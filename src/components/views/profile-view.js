@@ -1,8 +1,9 @@
 import { Form, Button, Col } from 'react-bootstrap';
+import style from './profile.module.css';
 
 export default function ProfileView(props) {
   return(
-    <Form className="mt-sm-5 mt-3 pl-sm-5 pl-3 pr-sm-5 pr-3">
+    <Form className={`border-primary pt-sm-5 pt-3 pb-sm-5 pb-3 pl-sm-5 pl-3 pr-sm-5 pr-3 ${style.bgLight}`}>
       <Form.Row>
         <Form.Group as={Col} controlId="regFirstName">
           <Form.Label>First name:</Form.Label>
