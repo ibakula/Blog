@@ -3,7 +3,7 @@ import style from './article.module.css';
 
 export default function ArticleView(props) {
   return (
-    <Row className="mt-3">
+    <Row className="mt-3 pl-sm-4 pr-sm-4 pl-3 pr-3">
       <Col md={8}>
         <Card>
           <Card.Body>
