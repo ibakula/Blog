@@ -1,5 +1,6 @@
 import { Card, Row, Col } from 'react-bootstrap';
 import style from './popular-articles.module.css';
+import { Link } from 'react-router-dom';
 
 export default function PopularArticles(props) {
   return (
@@ -15,7 +16,7 @@ export default function PopularArticles(props) {
           <Card.Body>
             <Card.Title className={style.titleBoundaries}>Some long title, veeeeeeeeery loong title</Card.Title>
             <Card.Text className={style.textBoundaries}>Added some text to see the results, but decided to make the text extremly long so I could see where do I want it to stop and I find text size extremly important. Etcetcetc</Card.Text>
-            <Card.Link href="/article/5">Read more...</Card.Link>
+            <Link to="/article/5" class="card-link">Read more...</Link>
           </Card.Body>
         </Card>
       </Row>
