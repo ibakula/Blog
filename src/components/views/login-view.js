@@ -9,11 +9,11 @@ export default function LoginView(props) {
         <Form className="ml-3">
           <Form.Group controlId="loginFormEmail">
             <Form.Label>User E-mail address:</Form.Label>
-            <Form.Control className={style.rectifyFormCtrlItem} type="email" placeholder="E-mail address" />
+            <Form.Control className={style.rectifyFormCtrlItem} type="email" placeholder="E-mail address" required />
           </Form.Group>
           <Form.Group controlId="loginFormPassword">
             <Form.Label>Password:</Form.Label>
-            <Form.Control className={style.rectifyFormCtrlItem} type="password" placeholder="E-mail address" />
+            <Form.Control className={style.rectifyFormCtrlItem} type="password" placeholder="E-mail address" required />
           </Form.Group>
           <Button variant="primary">Log in</Button>
         </Form>

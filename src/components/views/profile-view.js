@@ -7,21 +7,21 @@ export default function ProfileView(props) {
       <Form.Row>
         <Form.Group as={Col} controlId="regFirstName">
           <Form.Label>First name:</Form.Label>
-          <Form.Control type="text" placeholder="First name" />
+          <Form.Control type="text" placeholder="First name" required />
         </Form.Group>
         <Form.Group as={Col} controlId="regLastName">
           <Form.Label>Last name:</Form.Label>
-          <Form.Control type="text" placeholder="Surname" />
+          <Form.Control type="text" placeholder="Surname" required />
         </Form.Group>
       </Form.Row>
       <Form.Row>
         <Form.Group as={Col} controlId="regEmail">
           <Form.Label>E-mail:</Form.Label>
-          <Form.Control type="email" placeholder="New e-mail address" />
+          <Form.Control type="email" placeholder="New e-mail address" required />
         </Form.Group>
         <Form.Group as={Col} controlId="regPassword">
           <Form.Label>Password:</Form.Label>
-          <Form.Control type="password" placeholder="New password" />
+          <Form.Control type="password" placeholder="New password" required />
         </Form.Group>
       </Form.Row>
       <Form.Row>
