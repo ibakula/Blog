@@ -19,8 +19,12 @@ export default class NavigationBarView extends Component {
             <Link to="/" className="nav-link">Homepage</Link>
           </Nav>
           <Nav className="mr-2">
-            <Link to="/login" className="nav-link">Login</Link>
-            <Link to="/register" className="nav-link">Register</Link>
+          {
+            localStorage.getItem("email") != null ? 
+            <Link to="/login" className="nav-link">Logout</Link> :
+            (<><Link to="/login" className="nav-link">Login</Link>
+            <Link to="/register" className="nav-link">Register</Link></>)
+          }
           </Nav>
         </Navbar.Collapse>
         {this.props.children}
