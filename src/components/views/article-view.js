@@ -5,7 +5,7 @@ import style from './article.module.css';
 export default function ArticleView(props) {
   return (
     <Row className="pt-3 pl-sm-4 pr-sm-4 pl-3 pr-3">
-      <Col md={8}>
+      <Col md={8} sm={12}>
         <Card>
           <Card.Body>
             <Card.Title><Card.Img src="https://cdn.pixabay.com/photo/2014/05/02/23/46/bridge-336475_960_720.jpg" className={"mr-4 ml-2 " + style.imgRuleset} />Some title..</Card.Title>
