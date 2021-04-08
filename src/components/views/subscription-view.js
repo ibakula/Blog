@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import style from './formRules.module.css';
+import style from './form-rules.module.css';
 import { Row, Col, Button, Form } from 'react-bootstrap';
 
 export default function SubscriptionView(props) {

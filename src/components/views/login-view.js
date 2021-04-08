@@ -1,5 +1,5 @@
 import { Row, Col, Form, Button } from 'react-bootstrap';
-import style from './formRules.module.css';
+import style from './form-rules.module.css';
 
 export default function LoginView(props) {
   return (      
