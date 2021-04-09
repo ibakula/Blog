@@ -31,10 +31,10 @@ export default class MainLayout extends Component {
             {localStorage.getItem("email") != null && <Redirect to="/404" />}
           </Route>
           <Route exact path="/profile" component={Profile}>
-            {localStorage.getItem("email") != null && <Redirect to="/404" />}
+            {localStorage.getItem("email") == null && <Redirect to="/404" />}
           </Route>
+          <Route path="/profile/:userId" component={Profile} />
           <Route exact path="/404" component={NotFound} />
-          <Route path="/profile/:userId" component={Profile}/>
           <Route path="/article/:articleId" component={Article} />
           <Route path="*" component={NotFound} />
         </Switch>
