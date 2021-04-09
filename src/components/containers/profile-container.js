@@ -15,7 +15,7 @@ class ProfileContainer extends Component {
 
   render() {
     return (
-      <ProfileView userId={'userId' in this.props.match.params ? this.props.match.params.userId : null} />
+      <ProfileView userId={this.props.match.params.userId} userData={this.props.userData} />
     );
   }
 }
