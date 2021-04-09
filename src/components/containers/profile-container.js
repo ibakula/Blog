@@ -10,7 +10,8 @@ class ProfileContainer extends Component {
   static propTypes = {
     match: PropTypes.object,
     location: PropTypes.object,
-    history: PropTypes.object
+    history: PropTypes.object,
+    userData: PropTypes.object
   }
 
   render() {
