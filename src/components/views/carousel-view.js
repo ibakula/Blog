@@ -5,7 +5,7 @@ import style from './carousel.module.css';
 
 export default class CarouselView extends Component {
   static propTypes = {
-      articles: PropTypes.array
+    articles: PropTypes.array
   }
 
   render() {
