@@ -30,7 +30,7 @@ export default function PopularArticles(props) {
     }
   }
   else {
-    elements = <div style={{width:"70%", borderRadius: "8px 8px 0px 0px", border: "1px solid"}} class="border-light pb-3 pl-3 pr-3">
+    elements = <div style={{width:"auto", borderRadius: "8px 8px 0px 0px", border: "1px solid"}} class="border-light pb-3 pl-3 pr-3">
         <LoaderStripe className={`${style.dummyImg}`} heightMultiplier={5} />
         <LoaderStripe className={`${style.dummyArticleTitle}`} heightMultiplier={1.2} />
         <LoaderStripe className={`${style.dummyArticleText}`} heightMultiplier={1.2} />
