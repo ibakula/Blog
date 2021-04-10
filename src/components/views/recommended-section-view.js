@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import style from './recommended-section.module.css';
 import * as ErrorLayouts from '../layouts/404-layout';
 import LoaderStripe from './loader-stripe-view';
+import PropTypes from 'prop-types';
 
 export default function RecommendedSectionView(props) {
   let elements = null;
@@ -10,7 +11,7 @@ export default function RecommendedSectionView(props) {
     if (props.articles.length == 0) {
       elements = <ErrorLayouts.ContentNotFound />;
     }
-    else {
+    else if (props.articleId == props.articles[0].id) {
       elements = props.article.map(article => {
           return (
             <Col xs={"auto"} className="mt-3 mr-3">
@@ -50,4 +51,9 @@ export default function RecommendedSectionView(props) {
       </Row>
     </div>
   );
+};
+
+RecommendedSectionView.propTypes = {
+  articleId: PropTypes.number,
+  articles: PropTypes.array
 };

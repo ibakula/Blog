@@ -1,5 +1,6 @@
 import { Form, Button } from 'react-bootstrap';
 import style from './comment-section.module.css'
+import PropTypes from 'prop-types';
 
 export default function CommentSectionView(props) {
   return(
@@ -13,13 +14,25 @@ export default function CommentSectionView(props) {
           </Form.Group>
           <Button variant="primary">Comment</Button>
         </Form>
-        <div class="mt-3">
-          <div class="mt-2">
-            <p>Some comment written by the user.</p>
-            <p className="mt-1">Written by User on DD.MM.YYYY HH:MM</p>
-          </div>
-        </div>
+          {props.comments != null && props.comments.map(comment => {
+            if (comment.post_id == props.articleId) {
+              const date = new Date(comment.date);
+              return (
+                <div class="mt-3">
+                  <div class="mt-2">
+                    <p>{comment.text}.</p>
+                    <p className="mt-1">Written by {comment.author} on {date.toUTCString()}</p>
+                  </div>
+                </div>
+              );
+            }
+          })}
       </div>
     </div>
   );
+};
+
+CommentSectionView.propTypes = {
+  articleId: PropTypes.number,
+  comments: PropTypes.array
 };

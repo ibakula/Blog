@@ -3,11 +3,14 @@ import { Link } from 'react-router-dom';
 import style from './article.module.css';
 import LoaderStripe from './loader-stripe-view';
 import * as ErrorLayouts from '../layouts/404-layout';
+import PropTypes from 'prop-types';
 
 export default function ArticleView(props) {
   let elements = null;
   if (props.articleId != null) {
-    if (props.articles != null && props.articles.length == 1) {
+    if (props.articles != null && 
+      props.articles.length == 1 && 
+      props.articleId == props.articles[0].id) {
       elements = <GeneratedSingleArticlePage article={props.articles[0]} />;
     }
     else {
@@ -34,6 +37,11 @@ export default function ArticleView(props) {
       <Col md={4}>{props.children}</Col>
     </Row>
   );
+};
+
+ArticleView.propTypes = {
+  articleId: PropTypes.number,
+  articles: PropTypes.array
 };
 
 function DummySingleArticlePage() {
