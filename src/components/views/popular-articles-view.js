@@ -1,8 +1,44 @@
 import { Card, Row, Col } from 'react-bootstrap';
 import style from './popular-articles.module.css';
 import { Link } from 'react-router-dom';
+import ContentNotFound from '../layouts/404-layout';
+import LoaderStripe from './loader-stripe-view';
 
 export default function PopularArticles(props) {
+  let elements = null;
+  if (props.articles != null) {
+    if (props.articles.length == 0) {
+      elements = <ContentNotFound />;
+    }
+    else {
+      elements = props.articles.map((article) => {
+        return (
+          <Card border="light">
+            <Card.Img className={`card-body pb-0 ${style.limitImgSize}`} variant="top" src={article.img} />
+            <Card.Body>
+              <Card.Title className={style.titleBoundaries}>
+                {article.title.length > 20 ? article.title.slice(0, 20) + "..." : article.title}
+              </Card.Title>
+              <Card.Text className={style.textBoundaries}>
+                {article.text.length > 80 ? article.text.slice(0, 80) + "..." : article.text}
+                </Card.Text>
+              <Link to={`/article/${article.id}`} class="card-link">Read more...</Link>
+            </Card.Body>
+          </Card>
+        );
+      });
+    }
+  }
+  else {
+    elements = <div style={{width:"70%", borderRadius: "8px 8px 0px 0px", border: "1px solid"}} class="border-light pb-3 pl-3 pr-3">
+        <LoaderStripe className={`${style.dummyImg}`} heightMultiplier={5} />
+        <LoaderStripe className={`${style.dummyArticleTitle}`} heightMultiplier={1.2} />
+        <LoaderStripe className={`${style.dummyArticleText}`} heightMultiplier={1.2} />
+        <LoaderStripe className={`${style.dummyArticleText}`} heightMultiplier={1.2} />
+        <LoaderStripe className={`${style.dummyArticleText}`} heightMultiplier={1.2} />
+      </div>;
+  }
+
   return (
     <>
       <Row>
@@ -11,14 +47,7 @@ export default function PopularArticles(props) {
         </Card.Body>
       </Row>
       <Row>
-        <Card border="light">
-          <Card.Img className={"card-body pb-0 " + style.limitImgSize} variant="top" src="https://cdn.pixabay.com/photo/2014/05/02/23/46/bridge-336475_960_720.jpg" />
-          <Card.Body>
-            <Card.Title className={style.titleBoundaries}>Some long title, veeeeeeeeery loong title</Card.Title>
-            <Card.Text className={style.textBoundaries}>Added some text to see the results, but decided to make the text extremly long so I could see where do I want it to stop and I find text size extremly important. Etcetcetc</Card.Text>
-            <Link to="/article/5" class="card-link">Read more...</Link>
-          </Card.Body>
-        </Card>
+        {elements}
       </Row>
     </>
   );

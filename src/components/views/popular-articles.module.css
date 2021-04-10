@@ -17,3 +17,16 @@
   overflow: hidden;
   max-width: 14em;
 }
+
+.dummyArticleText {
+  width: 80%!important;
+}
+
+.dummyArticleTitle {
+  width: 90%!important;
+}
+
+.dummyImg {
+  width: 100%!important;
+  border-radius: 8px 8px 0px 0px;
+}
