@@ -10,7 +10,7 @@ export function PageNotFound() {
 export function ContentNotFound() {
   return (
     <div class="w-100 pl-3 pr-3 pt-3 pb-3">
-      <p class="lead">Sorry, there are currently no new articles added...</p>
+      <p class="lead">Sorry, looks like there's no content to load...</p>
     </div>
   );
 }
