@@ -84,11 +84,11 @@ function DummyArticle() {
 function GeneratedSingleArticlePage(article) {
   return (
     <Row>
-      <article className="pl-3 pr-4 w-100">
+      <div className="pl-3 pr-4 w-100">
         <h4 class="display-1 text-bold">Test Test</h4>
         <h3 class="display-2 lead">Fri, 01 April 2021, 8.30 GTM + 01.00</h3>
         <img src="https://cdn.pixabay.com/photo/2014/05/02/23/46/bridge-336475_960_720.jpg" width="5em" height="auto" /> 
-      </article>
+      </div>
     </Row>
   );
 }
