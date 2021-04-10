@@ -5,15 +5,15 @@ import LoaderStripe from './loader-stripe-view';
 
 export default function ArticleView(props) {
   let elements = null;
-  if ('articleId' in props && 'articles' in props && props.articles.length > 0) {
+  if (props.articleId != null && props.articles != null && props.articles.length > 0) {
     elements = <GeneratedSingleArticlePage article={props.articles[0]} />;
   }
-  else if ('articles' in props && props.articles.length > 0) {
+  else if (props.articles != null && props.articles.length > 0) {
     props.articles.map(article => {
       elements += <GeneratedArticle article={article} />;
     });
   }
-  else if ('articleId' in props) {
+  else if (props.articleId != null) {
     elements = <DummySingleArticlePage />
   }
   else {
