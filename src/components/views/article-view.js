@@ -5,19 +5,26 @@ import LoaderStripe from './loader-stripe-view';
 
 export default function ArticleView(props) {
   let elements = null;
-  if (props.articleId != null && props.articles != null && props.articles.length > 0) {
+  if (props.articleId != null) {
+   if (props.articles != null && props.articles.length > 0) {
     elements = <GeneratedSingleArticlePage article={props.articles[0]} />;
+   }
+   else {
+    elements = <DummySingleArticlePage />;
+   }
   }
-  else if (props.articles != null && props.articles.length > 0) {
-    props.articles.map(article => {
-      elements += <GeneratedArticle article={article} />;
-    });
-  }
-  else if (props.articleId != null) {
-    elements = <DummySingleArticlePage />
+  else if (props.articles != null) {
+    if (props.articles == -1) { // No posts found
+      elements = <NotFound />;
+    }
+    else if (props.articles.length > 0) {
+      props.articles.map(article => {
+        elements += <GeneratedArticle article={article} />;
+      });
+    }
   }
   else {
-    elements = <DummyArticle />
+    elements = <DummyArticle />;
   }
 
   return (
@@ -27,6 +34,16 @@ export default function ArticleView(props) {
     </Row>
   );
 };
+
+function NotFound() {
+  return (
+    <Row>
+      <div class="w-100 pl-3 pr-3 pt-3 pb-3">
+        <p class="lead">Sorry, there are currently no new articles added...</p>
+      </div>
+    </Row>
+  );
+}
 
 function DummySingleArticlePage() {
   return (
