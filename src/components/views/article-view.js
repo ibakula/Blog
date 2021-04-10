@@ -32,12 +32,12 @@ function DummySingleArticlePage() {
   return (
     <Row>
       <article className="pl-3 pr-4 w-100">
-        <LoaderStripe style={{width:"55%"}} heightMultiplier={1.2} className="mt-3" />
-        <LoaderStripe style={{width:"50%"}} heightMultiplier={1.2} className="mt-3" />
+        <LoaderStripe heightMultiplier={1.2} className={`mt-3 ${style.dummySingleArticleAuthor}`} />
+        <LoaderStripe heightMultiplier={1.2} className={`mt-3 ${style.dummySingleArticleDate}`} />
         <LoaderStripe widthMultiplier={2.5} heightMultiplier={6} className="mt-2" />
-        <LoaderStripe style={{width:"70%"}} heightMultiplier={1.2} className="mt-2" />
-        <LoaderStripe style={{width:"70%"}} heightMultiplier={1.2} className="mt-2" />
-        <LoaderStripe style={{width:"70%"}} heightMultiplier={1.2} className="mt-2" />
+        <LoaderStripe heightMultiplier={1.2} className={`mt-2 ${style.dummySingleArticleText}`} />
+        <LoaderStripe heightMultiplier={1.2} className={`mt-2 ${style.dummySingleArticleText}`} />
+        <LoaderStripe heightMultiplier={1.2} className={`mt-2 ${style.dummySingleArticleText}`} />
         <hr className="mt-4" />
       </article>
     </Row>
@@ -51,20 +51,20 @@ function DummyArticle() {
         <Card.Body>
           <Row noGutters={true}>
             <Col sm={3} xs={12}>
-              <LoaderStripe style={{maxWidth:"90%", minWidth:"50%", width:"auto", height:"140px"}} className="mr-3 ml-2" />
+              <LoaderStripe className={`mr-3 ml-2 ${style.dummyImg}`} />
             </Col>
             <Col sm={9}>
               <Card.Title>
-                <LoaderStripe style={{width:"90%"}} heightMultiplier={1.2} />  
+                <LoaderStripe className={style.dummyArticleTitle} heightMultiplier={1.2} />  
               </Card.Title>
               <Card.Subtitle className="mb-2">
-                <LoaderStripe style={{width:"80%"}} heightMultiplier={1.2} />
+                <LoaderStripe className={style.dummyArticleText} heightMultiplier={1.2} />
               </Card.Subtitle>
               <Card.Text className={style.textRuleset}>
-                <LoaderStripe style={{width:"80%"}} heightMultiplier={1.2} />
-                <LoaderStripe style={{width:"80%"}} heightMultiplier={1.2} />
-                <LoaderStripe style={{width:"80%"}} heightMultiplier={1.2} />
-                <LoaderStripe style={{width:"80%"}} heightMultiplier={1.2} />
+                <LoaderStripe className={style.dummyArticleText} heightMultiplier={1.2} />
+                <LoaderStripe className={style.dummyArticleText} heightMultiplier={1.2} />
+                <LoaderStripe className={style.dummyArticleText} heightMultiplier={1.2} />
+                <LoaderStripe className={style.dummyArticleText} heightMultiplier={1.2} />
               </Card.Text>
             </Col>
           </Row>
@@ -76,13 +76,11 @@ function DummyArticle() {
 function GeneratedSingleArticlePage(article) {
   return (
     <Row>
-      <Card>
-        <Card.Body>
-          <Card.Title><Card.Img src={article.img} className={`mr-4 ml-2 ${style.imgRuleset}`} />{article.title}</Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">{date.toUTCString()}</Card.Subtitle>
-          <Card.Text className={style.textRuleset}>{article.text}</Card.Text>
-        </Card.Body>
-      </Card>
+      <article className="pl-3 pr-4 w-100">
+        <h4 class="display-1 text-bold">Test Test</h4>
+        <h3 class="display-2 lead">Fri, 01 April 2021, 8.30 GTM + 01.00</h3>
+        <img src="https://cdn.pixabay.com/photo/2014/05/02/23/46/bridge-336475_960_720.jpg" width="5em" height="auto" /> 
+      </article>
     </Row>
   );
 }

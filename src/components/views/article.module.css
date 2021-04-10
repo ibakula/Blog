@@ -9,3 +9,30 @@
   max-height: 8.9em;
   overflow: hidden;
 }
+
+.dummySingleArticleAuthor {
+  width: 50%!important;
+}
+
+.dummySingleArticleDate {
+  width: 55%!important;
+}
+
+.dummySingleArticleText {
+  width: 70%!important;
+}
+
+.dummyArticleText {
+  width: 80%!important;
+}
+
+.dummyArticleTitle {
+  width: 90%!important;
+}
+
+.dummyImg {
+  max-width: 90%!important;
+  min-width: 50%!important; 
+  width: auto!important; 
+  height: 140px!important;
+}
