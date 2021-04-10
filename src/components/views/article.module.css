@@ -1,3 +1,9 @@
+.articleImg {
+  max-height: 25em;
+  max-width: 34em;
+  width: auto;
+}
+
 .imgRuleset {
   max-height: 10em;
   max-width: 10em;

@@ -15,10 +15,10 @@ export default function ArticleView(props) {
    }
   }
   else if (props.articles != null) {
-    if (props.articles == -1) { // No posts found
+    if (props.articles.length == 0) { // No posts found
       elements = <div><ContentNotFound /></div>;
     }
-    else if (props.articles.length > 0) {
+    else {
       props.articles.map(article => {
         elements += <GeneratedArticle article={article} />;
       });
@@ -82,13 +82,16 @@ function DummyArticle() {
 }
 
 function GeneratedSingleArticlePage(article) {
+  const date = new Date(article.date);
   return (
     <Row>
-      <div className="pl-3 pr-4 w-100">
-        <h4 class="display-1 text-bold">Test Test</h4>
-        <h3 class="display-2 lead">Fri, 01 April 2021, 8.30 GTM + 01.00</h3>
-        <img src="https://cdn.pixabay.com/photo/2014/05/02/23/46/bridge-336475_960_720.jpg" width="5em" height="auto" /> 
-      </div>
+      <article className="pt-3 pl-3 pr-4 w-100">
+        <h5 class="lead">{article.author}</h5>
+        <h5 class="text-muted">{date.toUTCString()}</h5>
+        <img src={article.img} className={`mt-3 mb-3 ${style.articleImg}`} />
+        <p class="lead">{article.text}</p>
+        <hr /> 
+      </article>
     </Row>
   );
 }
