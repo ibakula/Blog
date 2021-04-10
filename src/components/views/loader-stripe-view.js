@@ -13,7 +13,7 @@ export default function LoaderStripe(props) {
   'style' in props && Object.assign(style, props.style); 
 
   return (
-    <div style={style} className={'className' in props ? `mt-3 ${props.className}` : "mt-3"} />
+    <div style={style} className={'className' in props ? props.overrideClassName == true ? `${props.className}` : `${props.className} mt-3` : "mt-3"} />
   );
 };
 
