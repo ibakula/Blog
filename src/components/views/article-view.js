@@ -16,7 +16,7 @@ export default function ArticleView(props) {
   }
   else if (props.articles != null) {
     if (props.articles == -1) { // No posts found
-      elements = <ContentNotFound />;
+      elements = <div><ContentNotFound /></div>;
     }
     else if (props.articles.length > 0) {
       props.articles.map(article => {

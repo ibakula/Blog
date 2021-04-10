@@ -36,7 +36,7 @@ export default class MainLayout extends Component {
           <Route path="/profile/:userId" component={Profile} />
           <Route exact path="/404" component={PageNotFound} />
           <Route path="/article/:articleId" component={Article} />
-          <Route path="*" component={NotFound} />
+          <Route path="*" component={PageNotFound} />
         </Switch>
         <Footer />
       </>
