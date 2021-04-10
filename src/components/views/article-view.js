@@ -7,12 +7,12 @@ import * as ErrorLayouts from '../layouts/404-layout';
 export default function ArticleView(props) {
   let elements = null;
   if (props.articleId != null) {
-   if (props.articles != null && props.articles.length > 0) {
-    elements = <GeneratedSingleArticlePage article={props.articles[0]} />;
-   }
-   else {
-    elements = <DummySingleArticlePage />;
-   }
+    if (props.articles != null && props.articles.length == 1) {
+      elements = <GeneratedSingleArticlePage article={props.articles[0]} />;
+    }
+    else {
+      elements = <DummySingleArticlePage />;
+    }
   }
   else if (props.articles != null) {
     if (props.articles.length == 0) { // No posts found
@@ -58,10 +58,10 @@ function DummyArticle() {
       <Card style={{width:"93%"}}>
         <Card.Body>
           <Row noGutters={true}>
-            <Col sm={3} xs={12}>
+            <Col sm={"auto"} xs={12}>
               <LoaderStripe className={`mr-3 ml-2 ${style.dummyImg}`} />
             </Col>
-            <Col sm={9}>
+            <Col sm={8}>
               <Card.Title>
                 <LoaderStripe className={style.dummyArticleTitle} heightMultiplier={1.2} />  
               </Card.Title>

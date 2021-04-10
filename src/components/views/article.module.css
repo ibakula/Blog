@@ -37,8 +37,6 @@
 }
 
 .dummyImg {
-  max-width: 90%!important;
-  min-width: 50%!important; 
-  width: auto!important; 
+  width: 12em!important;
   height: 140px!important;
 }
