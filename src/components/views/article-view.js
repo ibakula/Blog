@@ -2,6 +2,7 @@ import { Card, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import style from './article.module.css';
 import LoaderStripe from './loader-stripe-view';
+import ContentNotFound from '../layouts/404-layout';
 
 export default function ArticleView(props) {
   let elements = null;
@@ -15,7 +16,7 @@ export default function ArticleView(props) {
   }
   else if (props.articles != null) {
     if (props.articles == -1) { // No posts found
-      elements = <NotFound />;
+      elements = <ContentNotFound />;
     }
     else if (props.articles.length > 0) {
       props.articles.map(article => {
@@ -34,16 +35,6 @@ export default function ArticleView(props) {
     </Row>
   );
 };
-
-function NotFound() {
-  return (
-    <Row>
-      <div class="w-100 pl-3 pr-3 pt-3 pb-3">
-        <p class="lead">Sorry, there are currently no new articles added...</p>
-      </div>
-    </Row>
-  );
-}
 
 function DummySingleArticlePage() {
   return (
