@@ -12,7 +12,7 @@ import Login from './login-layout';
 import Registration from './registration-layout';
 import Profile from './profile-layout';
 import Article from './article-layout';
-import PageNotFound from './404-layout';
+import * as ErrorLayouts from './404-layout';
 
 export default class MainLayout extends Component {
   static propTypes = {  
@@ -34,9 +34,9 @@ export default class MainLayout extends Component {
             {localStorage.getItem("email") == null && <Redirect to="/404" />}
           </Route>
           <Route path="/profile/:userId" component={Profile} />
-          <Route exact path="/404" component={PageNotFound} />
+          <Route exact path="/404" component={ErrorLayouts.PageNotFound} />
           <Route path="/article/:articleId" component={Article} />
-          <Route path="*" component={PageNotFound} />
+          <Route path="*" component={ErrorLayouts.PageNotFound} />
         </Switch>
         <Footer />
       </>

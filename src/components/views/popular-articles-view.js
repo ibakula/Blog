@@ -1,14 +1,14 @@
 import { Card, Row, Col } from 'react-bootstrap';
 import style from './popular-articles.module.css';
 import { Link } from 'react-router-dom';
-import ContentNotFound from '../layouts/404-layout';
+import * as ErrorLayouts from '../layouts/404-layout';
 import LoaderStripe from './loader-stripe-view';
 
 export default function PopularArticles(props) {
   let elements = null;
   if (props.articles != null) {
     if (props.articles.length == 0) {
-      elements = <ContentNotFound />;
+      elements = <ErrorLayouts.ContentNotFound />;
     }
     else {
       elements = props.articles.map((article) => {

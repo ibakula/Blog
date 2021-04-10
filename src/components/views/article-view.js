@@ -2,7 +2,7 @@ import { Card, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import style from './article.module.css';
 import LoaderStripe from './loader-stripe-view';
-import ContentNotFound from '../layouts/404-layout';
+import * as ErrorLayouts from '../layouts/404-layout';
 
 export default function ArticleView(props) {
   let elements = null;
@@ -16,7 +16,7 @@ export default function ArticleView(props) {
   }
   else if (props.articles != null) {
     if (props.articles.length == 0) { // No posts found
-      elements = <div><ContentNotFound /></div>;
+      elements = <div><ErrorLayouts.ContentNotFound /></div>;
     }
     else {
       props.articles.map(article => {
