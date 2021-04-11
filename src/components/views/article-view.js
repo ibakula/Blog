@@ -96,7 +96,7 @@ function GeneratedSingleArticlePage(article) {
       <article className="pt-3 pl-3 pr-4 w-100">
         <h5 class="lead">{article.author}</h5>
         <h5 class="text-muted">{date.toUTCString()}</h5>
-        <img src={article.img} className={`mt-3 mb-3 ${style.articleImg}`} />
+        <img src={article.img} className={`${style.articleImg} mt-3 mb-3`} />
         <p class="lead">{article.text}</p>
         <hr /> 
       </article>

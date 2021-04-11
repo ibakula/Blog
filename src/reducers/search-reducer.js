@@ -4,7 +4,7 @@ const initialState = {
   results: []
 };
 
-function searchReducer(state = initialState, action) {
+function reducer(state = initialState, action) {
   switch(action.type) {
     case actionTypes.DISPLAY_RESULTS:
       return Object.assign({}, state, { results: action.results });
@@ -16,4 +16,4 @@ function searchReducer(state = initialState, action) {
   return state;
 }
 
-export default searchReducer;
+export default reducer;
