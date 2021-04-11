@@ -67,7 +67,9 @@ export function getArticles(id) {
     else {
       return fetchArticlesFromId(response.data.id).then(responses => {
         responses.map(response => {
-          articles.push(response.data);
+          fetchSingleArticleData(response.data).then((article) => {
+            articles.push(article);
+          });
         })
         store.dispatch(actions.getArticlesSuccess(articles));
         return articles;
