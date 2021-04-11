@@ -2,6 +2,11 @@ import * as actions from '../actions/article-actions';
 import axios from 'axios';
 import store from '../store';
 
+
+function getArticleById(id) {
+  return axios.get('/api/posts' + id != null ? `/${id}` : '/last');
+}
+
 function splitTextData(text) {
   const data = {
     img: '',
@@ -24,11 +29,7 @@ function splitTextData(text) {
   return data;
 }
 
-function getArticleById(id) {
-  return axios.get('/api/posts' + id != null ? `/${id}` : '/last');
-}
-
-function fetchSingleArticleData(article, fetchAuthor = false) {
+function finalizeData(article, fetchAuthor = false) {
   const textData = splitTextData(article.text);
   const nArticle = Object.assign({}, article);
   nArticle.img = textData.img;
@@ -57,7 +58,7 @@ export function getArticles(id) {
   return getArticleById(id).then(response => {
     let articles = [];
     if (id != null) {
-      return fetchSingleArticleData(response.data, true)
+      return finalizeData(response.data, true)
         .then(article => {
           articles.push(article);
           store.dispatch(actions.getArticlesSuccess(articles));
@@ -67,7 +68,7 @@ export function getArticles(id) {
     else {
       return fetchArticlesFromId(response.data.id).then(responses => {
         responses.map(response => {
-          fetchSingleArticleData(response.data).then((article) => {
+          finalizeData(response.data).then((article) => {
             articles.push(article);
           });
         })
