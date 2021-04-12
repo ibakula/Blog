@@ -31,6 +31,10 @@ export function getArticles(id) {
   });
 };
 
+/**
+ * Utility functions
+ */
+
 function finalizeData(article, fetchAuthor = false) {
   const textData = splitTextData(article.text);
   const nArticle = Object.assign({}, article);
