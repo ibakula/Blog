@@ -1,9 +1,9 @@
 import * as actions from '../actions/article-actions';
-import axios from 'axios';
+import * as utility from './api-utility';
 import store from '../store';
 
 export function getArticles(id) {
-  return getArticleById(id).then(response => {
+  return utility.getDataByIdFromApiWrapper('/api/posts', id).then(response => {
     let articles = [];
     if (id != null) {
       return finalizeData(response.data, true)
@@ -31,10 +31,6 @@ export function getArticles(id) {
   });
 };
 
-function getArticleById(id) {
-  return axios.get('/api/posts' + id != null ? `/${id}` : '/last');
-}
-
 function finalizeData(article, fetchAuthor = false) {
   const textData = splitTextData(article.text);
   const nArticle = Object.assign({}, article);
@@ -42,7 +38,7 @@ function finalizeData(article, fetchAuthor = false) {
   nArticle.text = textData.text;
   delete nArticle.views;
 
-  return (fetchAuthor ? axios.get(`/api/users/${article.authorId}`)
+  return (fetchAuthor ? utility.getDataByIdFromApiWrapper('/api/users', article.authorId)
     .then(response => {
       nArticle.author = `${response.data.first_name} ${response.data.last_name}`;
       return nArticle;
