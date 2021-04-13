@@ -4,7 +4,6 @@ import PopularSectionView from '../views/popular-articles-view';
 import getArticles from '../../api/article-api';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import store from '../../store';
 
 class ArticleContainer extends Component {
   componentDidMount() {
