@@ -15,7 +15,7 @@ export default function getArticles(id) {
     }
     else {
       return fetchArticlesFromId(response.data.id).then(responses => {
-        responses.map(response => {
+        responses.forEach(response => {
           finalizeData(response.data).then((article) => {
             articles.push(Object.assign({}, article));
           });
