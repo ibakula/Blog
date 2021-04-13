@@ -104,14 +104,24 @@ function GeneratedSingleArticlePage(props) {
 }
 
 function GeneratedArticle(props) {
-  const date = new Date(props.article.date);
+  const date = new Date(parseInt(props.article.date));
+
+  let shortenedTitle = props.article.title.length > 30 ? 
+    props.article.title.slice(0, 30) + "..." : props.article.title;
+
+  let shortenedText = props.article.text.length > 150 ? 
+    props.article.text.slice(0, 150) + "..." : props.article.text;
+
   return (
-    <Row>
+    <Row className="mb-3">
       <Card>
         <Card.Body>
-          <Card.Title><Card.Img src={props.article.img} className={"mr-4 ml-2 " + style.imgRuleset} />{props.article.title}</Card.Title>
+          <Card.Title>
+            <Card.Img src={props.article.img} className={"mr-4 ml-2 " + style.imgRuleset} />
+            {shortenedTitle}
+          </Card.Title>
           <Card.Subtitle className="mb-2 text-muted">{date.toUTCString()}</Card.Subtitle>
-          <Card.Text className={style.textRuleset}>{props.article.text}</Card.Text>
+          <Card.Text className={style.textRuleset}>{shortenedText}</Card.Text>
           <Link to={`/article/${props.article.id}`} className="card-link">Read more...</Link>
         </Card.Body>
       </Card>
