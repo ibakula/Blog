@@ -23,7 +23,7 @@ export default function ArticleView(props) {
       elements = <div><ErrorLayouts.ContentNotFound /></div>;
     }
     else {
-      elements = <GeneratedArticle article={props.articles[0]} />;
+      elements = props.articles.map(article => <GeneratedArticle article={article} />);
     }
   }
   else {
