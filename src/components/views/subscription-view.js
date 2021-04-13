@@ -10,7 +10,7 @@ export default function SubscriptionView(props) {
           <h3 className="display-5">Subscribe to our content:</h3>
           <Form>
             <Form.Group controlId="subscriptionFormEmail">
-              <Form.Label class="lead">E-mail address:</Form.Label>
+              <Form.Label className="lead">E-mail address:</Form.Label>
               <Form.Control type="email" placeholder="E-mail" className={style.rectifyFormCtrlItem} required />
             </Form.Group>
             <Button variant="primary">Subscribe!</Button>

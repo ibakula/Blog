@@ -22,7 +22,7 @@ export default function PopularArticles(props) {
               <Card.Text className={style.textBoundaries}>
                 {article.text.length > 80 ? article.text.slice(0, 80) + "..." : article.text}
                 </Card.Text>
-              <Link to={`/article/${article.id}`} class="card-link">Read more...</Link>
+              <Link to={`/article/${article.id}`} className="card-link">Read more...</Link>
             </Card.Body>
           </Card>
         );
@@ -30,7 +30,7 @@ export default function PopularArticles(props) {
     }
   }
   else {
-    elements = <div style={{width:"auto", borderRadius: "8px 8px 0px 0px", border: "1px solid"}} class="border-light pb-3 pl-3 pr-3">
+    elements = <div style={{width:"auto", borderRadius: "8px 8px 0px 0px", border: "1px solid"}} className="border-light pb-3 pl-3 pr-3">
         <LoaderStripe className={`${style.dummyImg}`} heightMultiplier={5} />
         <LoaderStripe className={`${style.dummyArticleTitle}`} heightMultiplier={1.2} />
         <LoaderStripe className={`${style.dummyArticleText}`} heightMultiplier={1.2} />

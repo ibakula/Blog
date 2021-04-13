@@ -7,11 +7,7 @@ const initialState = {
 function reducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.UPDATE_ARTICLES_SUCCESS:
-      const results = [];
-      action.results.map(item => {
-        results.push({...item});
-      });
-      return { articles: results };
+      return Object.assign({}, state, { articles: action.articles });
     case actionTypes.UPDATE_ARTICLES_FAIL:
       return initialState;
   }

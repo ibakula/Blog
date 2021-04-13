@@ -4,6 +4,7 @@ import style from './article.module.css';
 import LoaderStripe from './loader-stripe-view';
 import * as ErrorLayouts from '../layouts/404-layout';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 export default function ArticleView(props) {
   let elements = null;
@@ -18,13 +19,11 @@ export default function ArticleView(props) {
     }
   }
   else if (props.articles != null) {
-    if (props.articles.length == 0) { // No posts found
+    if (props.articles.length < 1) { // No posts found
       elements = <div><ErrorLayouts.ContentNotFound /></div>;
     }
     else {
-      props.articles.map(article => {
-        elements += <GeneratedArticle article={article} />;
-      });
+      elements = <GeneratedArticle article={props.articles[0]} />;
     }
   }
   else {
@@ -89,31 +88,31 @@ function DummyArticle() {
     </Row>);
 }
 
-function GeneratedSingleArticlePage(article) {
-  const date = new Date(article.date);
+function GeneratedSingleArticlePage(props) {
+  const date = new Date(props.article.date);
   return (
     <Row>
       <article className="pt-3 pl-3 pr-4 w-100">
-        <h5 class="lead">{article.author}</h5>
-        <h5 class="text-muted">{date.toUTCString()}</h5>
-        <img src={article.img} className={`${style.articleImg} mt-3 mb-3`} />
-        <p class="lead">{article.text}</p>
+        <h5 className="lead">{props.article.author}</h5>
+        <h5 className="text-muted">{date.toUTCString()}</h5>
+        <img src={props.article.img} className={`${style.articleImg} mt-3 mb-3`} />
+        <p className="lead">{props.article.text}</p>
         <hr /> 
       </article>
     </Row>
   );
 }
 
-function GeneratedArticle(article) {
-  const date = new Date(article.date)
+function GeneratedArticle(props) {
+  const date = new Date(props.article.date);
   return (
-    <Row key={article.id}>
+    <Row>
       <Card>
         <Card.Body>
-          <Card.Title><Card.Img src={article.img} className={"mr-4 ml-2 " + style.imgRuleset} />{article.title.length > 30 ? article.title.slice(0, 30) + "..." : article.title}</Card.Title>
+          <Card.Title><Card.Img src={props.article.img} className={"mr-4 ml-2 " + style.imgRuleset} />{props.article.title}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">{date.toUTCString()}</Card.Subtitle>
-          <Card.Text className={style.textRuleset}>{article.text.length > 150 ? article.text.slice(0, 150) + "..." : article.text}</Card.Text>
-          <Link to={`/article/${article.id}`} className="card-link">Read more...</Link>
+          <Card.Text className={style.textRuleset}>{props.article.text}</Card.Text>
+          <Link to={`/article/${props.article.id}`} className="card-link">Read more...</Link>
         </Card.Body>
       </Card>
     </Row>);

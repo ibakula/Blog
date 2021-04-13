@@ -1,10 +1,10 @@
 import * as actions from '../actions/article-actions';
-import * as utility from './api-utility';
+import getDataByIdFromApiWrapper from './api-utility';
 import store from '../store';
 
-export function getArticles(id) {
-  return utility.getDataByIdFromApiWrapper('/api/posts', id).then(response => {
-    let articles = [];
+export default function getArticles(id) {
+  return getDataByIdFromApiWrapper('http://127.0.0.1:80/api/posts', id).then(response => {
+    const articles = [];
     if (id != null) {
       return finalizeData(response.data, true)
         .then(article => {
@@ -15,11 +15,12 @@ export function getArticles(id) {
     }
     else {
       return fetchArticlesFromId(response.data.id).then(responses => {
-        responses.map(response => {
+        responses.forEach(response => {
           finalizeData(response.data).then((article) => {
-            articles.push(article);
+            articles.push(Object.assign({}, article));
           });
         })
+        console.log(articles.length);
         store.dispatch(actions.getArticlesSuccess(articles));
         return articles;
       });
@@ -42,7 +43,7 @@ function finalizeData(article, fetchAuthor = false) {
   nArticle.text = textData.text;
   delete nArticle.views;
 
-  return (fetchAuthor ? utility.getDataByIdFromApiWrapper('/api/users', article.authorId)
+  return (fetchAuthor ? getDataByIdFromApiWrapper('http://localhost:80/api/users', article.authorId)
     .then(response => {
       nArticle.author = `${response.data.first_name} ${response.data.last_name}`;
       return nArticle;
@@ -72,11 +73,11 @@ function splitTextData(text) {
 }
 
 function fetchArticlesFromId(startId) {
-  let state = getArticleById(startId);
+  let state = getDataByIdFromApiWrapper('http://127.0.0.1:80/api/posts', startId);
   let states = [];
-  for (let i = startId-1; i > 0 && i > (stardId-5); --i) {
+  for (let i = startId-1; i > 0 && i > (startId-5); --i) {
     states.push(state);
-    state = state.then(() => getArticleById(i));
+    state = state.then(() => getDataByIdFromApiWrapper('http://127.0.0.1:80/api/posts', i));
   }
 
   return Promise.all(states);
