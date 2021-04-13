@@ -14,18 +14,16 @@ export default function CommentSectionView(props) {
           </Form.Group>
           <Button variant="primary">Comment</Button>
         </Form>
-          {props.comments != null && props.comments.map(comment => {
-            if (comment.post_id == props.articleId) {
-              const date = new Date(comment.date);
-              return (
-                <div className="mt-3">
-                  <div className="mt-2">
-                    <p>{comment.text}.</p>
-                    <p className="mt-1">Written by {comment.author} on {date.toUTCString()}</p>
-                  </div>
+          {props.comments.map(comment => {
+            const date = new Date(parseInt(comment.date));
+            return (comment.post_id == props.articleId &&
+              <div className="mt-3">
+                <div className="mt-2">
+                  <p>{comment.text}.</p>
+                  <p className="mt-1">Written by {comment.author} on {date.toUTCString()}</p>
                 </div>
-              );
-            }
+              </div>
+            );
           })}
       </div>
     </div>

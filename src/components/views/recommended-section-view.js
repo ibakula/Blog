@@ -2,7 +2,6 @@ import { Card, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import style from './recommended-section.module.css';
 import * as ErrorLayouts from '../layouts/404-layout';
-import LoaderStripe from './loader-stripe-view';
 import PropTypes from 'prop-types';
 
 export default function RecommendedSectionView(props) {
@@ -12,7 +11,7 @@ export default function RecommendedSectionView(props) {
       elements = <ErrorLayouts.ContentNotFound />;
     }
     else if (props.articleId == props.articles[0].id) {
-      elements = props.article.map(article => {
+      elements = props.articles.map(article => {
           return (
             <Col xs={"auto"} className="mt-3 mr-3">
               <Card className={`${style.articleRuleset}`}>
@@ -28,17 +27,6 @@ export default function RecommendedSectionView(props) {
         }
       );
     }
-  }
-  else {
-    elements = <Col xs={"auto"}>
-        <div style={{border:"1px solid", borderRadius:"8px 8px 0px 0px"}} className="border-light pb-3">
-          <LoaderStripe style={{width:"13.5em", borderRadius:"8px 8px 0px 0px"}} heightMultiplier={5.5} overrideClassName={true} className="mt-0" />
-          <LoaderStripe heightMultiplier={1.2} widthMultiplier={2} className="ml-3 mr-3" />
-          <LoaderStripe heightMultiplier={1.2} widthMultiplier={2} className="ml-3 mr-3" />
-          <LoaderStripe heightMultiplier={1.2} widthMultiplier={2} className="ml-3 mr-3" />
-          <LoaderStripe heightMultiplier={1.2} widthMultiplier={1.4} className="ml-3 mr-3" />
-        </div>
-      </Col>;
   }
 
   return (
