@@ -15,12 +15,12 @@ export default function getArticles(id) {
     }
     else {
       return fetchArticlesFromId(response.data.id).then(responses => {
-        responses.forEach(response => {
+        responses.map(response => {
           finalizeData(response.data).then((article) => {
             articles.push(Object.assign({}, article));
           });
         })
-        console.log(articles.length);
+      }).then(() => {
         store.dispatch(actions.getArticlesSuccess(articles));
         return articles;
       });
