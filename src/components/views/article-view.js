@@ -18,6 +18,9 @@ export default function ArticleView(props) {
       elements = <DummySingleArticlePage />;
     }
   }
+  else if (!props.loaded) {
+    elements = <DummyArticle />;
+  }
   else if (props.articles != null) {
     if (props.articles.length < 1) { // No posts found
       elements = <div><ErrorLayouts.ContentNotFound /></div>;
@@ -25,9 +28,6 @@ export default function ArticleView(props) {
     else {
       elements = props.articles.map(article => <GeneratedArticle article={article} />);
     }
-  }
-  else {
-    elements = <DummyArticle />;
   }
 
   return (

@@ -6,13 +6,21 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 
 class ArticleContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasLoaded: false };
+  }
+
   componentDidMount() {
-    getArticles();
+    getArticles()
+    .finally(() => {
+      this.setState({ hasLoaded: true });
+    });
   }
 
   render() {
     return (
-      <ArticleView articleId={this.props.match.params.articleId} articles={this.props.articles}>
+      <ArticleView articleId={this.props.match.params.articleId} articles={this.props.articles} loaded={this.state.hasLoaded}>
         <PopularSectionView />
       </ArticleView>
     );
