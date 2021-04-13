@@ -12,7 +12,7 @@ export default function PopularArticles(props) {
         </Card.Body>
       </Row>
       <Row>
-        {props.articles.map(article => {
+        {props.loaded && props.articles.length < 1 ? <ErrorLayouts.ContentNotFound /> : props.articles.map(article => {
           return (
             <Card border="light">
               <Card.Img className={`card-body pb-0 ${style.limitImgSize}`} variant="top" src={article.img} />

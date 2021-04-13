@@ -7,17 +7,17 @@ import React from 'react';
 
 export default function ArticleView(props) {
   let elements = null;
-  
-  if (props.articleId != null) {
-    if (props.articles != null && 
-      props.articles.length == 1 && 
-      props.articleId == props.articles[0].id) {
-      elements = <GeneratedSingleArticlePage article={props.articles[0]} />;
-    }
+
+  if (props.loaded && 
+    (props.articles.length < 1 || !('id' in props.articles[0]))) {
+    elements = <div><ErrorLayouts.ContentNotFound /></div>;
   }
-  else if (props.articles != null) {
-    if (props.articles.length < 1 && props.loaded) { // No posts found
-      elements = <div><ErrorLayouts.ContentNotFound /></div>;
+
+  if (props.articles.length > 0) {
+    if ('articleId' in props && 
+      'id' in props.articles[0] && 
+      props.articles[0].id == articleId) {
+      elements = <GeneratedSingleArticlePage article={props.articles[0]} />
     }
     else {
       elements = props.articles.map(article => <GeneratedArticle article={article} />);
