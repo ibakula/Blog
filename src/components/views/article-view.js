@@ -9,7 +9,10 @@ export default function ArticleView(props) {
   let elements = null;
 
   if (props.loaded && 
-    (props.articles.length < 1 || !('id' in props.articles[0]))) {
+    (props.articles.length < 1 || 
+    !('id' in props.articles[0]) ||
+    ('articleId' in props && 
+    props.articles[0].id != props.articleId))) {
     elements = <div><ErrorLayouts.ContentNotFound /></div>;
   }
 
