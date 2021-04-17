@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import ArticleView from '../views/article-view';
 import PopularSectionView from '../views/popular-articles-view';
 import getArticles from '../../api/article-api';
-import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 
 class ArticleContainer extends Component {
