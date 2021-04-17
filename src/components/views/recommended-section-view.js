@@ -12,14 +12,16 @@ export default function RecommendedSectionView(props) {
     }
     else if (props.articleId == props.articles[0].id) {
       elements = props.articles.map(article => {
+          let title = article.title.length > 30 ? article.title.slice(0, 30) + "..." : article.title;
+          let text = article.text.length > 130 ? article.text.slice(0, 130) + "..." : article.text;
           return (
             <Col xs={"auto"} className="mt-3 mr-3">
               <Card className={`${style.articleRuleset}`}>
                 <Card.Img variant="top" src="https://cdn.pixabay.com/photo/2014/05/02/23/46/bridge-336475_960_720.jpg" alt="Image" />
                 <Card.Body>
-                  <Card.Title className={`${style.titleRuleset}`}>Some very veery veeery longsdasa title with more and more text and more and more</Card.Title>
-                  <Card.Text className={`${style.textRuleset}`}>Some text that is extremly loong and so I could test out the size of the text I would find suitable and compare everything together. Into the fifth line we go.</Card.Text>
-                  <Link to="/5" class="card-link">Read more...</Link>
+                  <Card.Title className={`${style.titleRuleset}`}>{title}</Card.Title>
+                  <Card.Text className={`${style.textRuleset}`}>{text}</Card.Text>
+                  <Link to={`/${article.id}`} class="card-link">Read more...</Link>
                 </Card.Body>
               </Card>
             </Col>

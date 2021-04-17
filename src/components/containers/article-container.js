@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import ArticleView from '../views/article-view';
 import PopularSectionView from '../views/popular-articles-view';
 import getArticles from '../../api/article-api';
@@ -11,6 +12,14 @@ class ArticleContainer extends Component {
     this.state = { hasLoaded: false };
   }
 
+  static propTypes = {
+    articleId: PropTypes.number
+  }
+
+  static defaultProps = {
+    articleId: null
+  }
+
   componentDidMount() {
     getArticles()
     .finally(() => {
@@ -20,8 +29,8 @@ class ArticleContainer extends Component {
 
   render() {
     return (
-      <ArticleView articleId={this.props.match.params.articleId} articles={this.props.articles} loaded={this.state.hasLoaded}>
-        <PopularSectionView loaded={true} articles={[]}/>
+      <ArticleView articleId={this.props.articleId} articles={this.props.articles} loaded={this.state.hasLoaded}>
+        <PopularSectionView loaded={this.state.hasLoaded} articles={this.props.popularArticles}/>
       </ArticleView>
     );
   }
@@ -29,8 +38,9 @@ class ArticleContainer extends Component {
 
 function mapStateToProps(store) {
   return {
-    articles: store.articleState.articles
+    articles: store.articleState.articles,
+    popularArticles: store.popularState.articles
   }
 }
 
-export default connect(mapStateToProps)(withRouter(ArticleContainer));
+export default connect(mapStateToProps)(ArticleContainer);

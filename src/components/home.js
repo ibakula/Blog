@@ -12,7 +12,7 @@ export default class Home extends Component {
     return (
       <>
         <Carousel />
-        <Article articleId={0} />
+        <Article articleId={null} />
         <SubscriptionDash />
       </>
     );
