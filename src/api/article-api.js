@@ -3,7 +3,8 @@ import getDataByIdFromApiWrapper from './api-utility';
 import store from '../store';
 
 export default function getArticles(id) {
-  return getDataByIdFromApiWrapper('http://127.0.0.1:80/api/posts', id).then(response => {
+  return getDataByIdFromApiWrapper('http://127.0.0.1:80/api/posts', id)
+  .then(response => {
     const articles = [];
     if (id != null) {
       return finalizeData(response.data, true)
@@ -27,8 +28,8 @@ export default function getArticles(id) {
     }
   })
   .catch(error => {
-    store.dispatch(actions.getArticlesFail());
-    throw error;
+    //store.dispatch(actions.getArticlesFail());
+    return Promise.reject(error);
   });
 };
 
