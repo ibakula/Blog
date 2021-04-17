@@ -11,13 +11,13 @@ export default function ArticleView(props) {
   if (props.loaded && 
     (props.articles.length < 1 || 
     !('id' in props.articles[0]) ||
-    ('articleId' in props && 
+    (props.articleId != null &&
     props.articles[0].id != props.articleId))) {
     elements = <div><ErrorLayouts.ContentNotFound /></div>;
   }
 
   if (props.articles.length > 0) {
-    if ('articleId' in props && 
+    if (props.articleId != null &&
       'id' in props.articles[0] && 
       props.articles[0].id == articleId) {
       elements = <GeneratedSingleArticlePage article={props.articles[0]} />
