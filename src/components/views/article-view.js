@@ -4,6 +4,7 @@ import style from './article.module.css';
 import * as ErrorLayouts from '../layouts/404-layout';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 
 export default function ArticleView(props) {
   let elements = null;
@@ -13,7 +14,12 @@ export default function ArticleView(props) {
     !('id' in props.articles[0]) ||
     (props.articleId != null &&
     props.articles[0].id != props.articleId))) {
-    elements = <div><ErrorLayouts.ContentNotFound /></div>;
+    if (props.articleId != null) {
+      return <Redirect to="/404" />;
+    }
+    else {
+      elements = <div><ErrorLayouts.ContentNotFound /></div>
+    };
   }
 
   if (props.articles.length > 0) {
