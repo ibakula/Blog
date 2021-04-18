@@ -20,7 +20,7 @@ class RecommendedSectionContainer extends Component {
 };
 
 function mapStateToProps(store) {
-  const categoryId = store.articleState.articles.length == 1 ? 
+  const categoryId = store.articleState.articles.length > 0 ? 
   store.articleState.articles[0].category_id : null;
 
   return {

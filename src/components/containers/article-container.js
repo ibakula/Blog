@@ -1,9 +1,9 @@
 import { Component } from 'react';
-import PropTypes from 'prop-types';
 import ArticleView from '../views/article-view';
-import PopularSectionView from '../views/popular-articles-view';
+import PopularSectionContainer from './popular-articles-container';
 import * as api from '../../api/article-api';
 import { connect } from 'react-redux';
+
 
 class ArticleContainer extends Component {
   constructor(props) {
@@ -11,25 +11,33 @@ class ArticleContainer extends Component {
     this.state = { hasLoaded: false };
   }
 
-  static propTypes = {
-    articleId: PropTypes.number
-  }
-
-  static defaultProps = {
-    articleId: null
-  }
-
   componentDidMount() {
-    api.getArticles()
+    api.getArticles(this.props.articleId)
     .finally(() => {
       this.setState({ hasLoaded: true });
     });
   }
 
+  componentDidUpdate(prevState) {
+    if (prevState.articleId == this.props.articleId) {
+      return;
+    }
+    this.setState({ hasLoaded: false });
+    api.getArticles(this.props.articleId)
+    .finally(() => {
+      this.setState({ hasLoaded: true });
+    });
+  }
+
+  componentWillUnmount() {
+    this.setState({ hasLoaded: false });
+    api.resetData();
+  }
+
   render() {
     return (
       <ArticleView articleId={this.props.articleId} articles={this.props.articles} loaded={this.state.hasLoaded}>
-        <PopularSectionView loaded={this.state.hasLoaded} articles={this.props.popularArticles}/>
+        <PopularSectionContainer loaded={this.state.hasLoaded} />
       </ArticleView>
     );
   }
@@ -37,8 +45,7 @@ class ArticleContainer extends Component {
 
 function mapStateToProps(store) {
   return {
-    articles: store.articleState.articles,
-    popularArticles: store.popularState.articles
+    articles: store.articleState.articles
   }
 }
 
