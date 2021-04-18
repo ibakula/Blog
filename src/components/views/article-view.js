@@ -8,33 +8,25 @@ import { Redirect } from 'react-router-dom';
 
 export default function ArticleView(props) {
   let elements = null;
+  let articleId = parseInt(props.articleId);
 
-  if (props.loaded && 
-    (props.articles.length < 1 || 
-    !('id' in props.articles[0]) ||
-    (props.articleId != null &&
-    props.articles[0].id != props.articleId))) {
-    if (props.articleId != null) {
-      return <Redirect to="/404" />;
+  if (props.loaded) {
+    if (props.articles.length < 1 || !('id' in props.articles[0])) {
+      if (Number.isSafeInteger(articleId)) {
+        return <Redirect to="/404" />;
+      }
+      elements = <ErrorLayouts.ContentNotFound />;
     }
-    else {
-      elements = <div><ErrorLayouts.ContentNotFound /></div>
-    };
-  }
-
-  if (props.articles.length > 0) {
-    if (props.articleId != null &&
-      'id' in props.articles[0] && 
-      props.articles[0].id == articleId) {
-      elements = <GeneratedSingleArticlePage article={props.articles[0]} />
-    }
-    else {
+    else if (!Number.isSafeInteger(articleId)) {
       elements = props.articles.map(article => <GeneratedArticle article={article} />);
+    }
+    else if (articleId == props.articles[0].id) {
+      elements = <GeneratedSingleArticlePage article={props.articles[0]} />;
     }
   }
 
   return (
-    <Row className="pt-3 pl-sm-4 pr-sm-4 pl-3 pr-3">
+    <Row className="pt-3 pl-sm-4 pr-sm-4 pl-2 pr-2">
       <Col md={8} sm={12}>{elements}</Col>
       <Col md={4}>{props.children}</Col>
     </Row>
@@ -42,18 +34,19 @@ export default function ArticleView(props) {
 };
 
 ArticleView.propTypes = {
-  articleId: PropTypes.number,
+  articleId: PropTypes.string,
   articles: PropTypes.array
 };
 
 function GeneratedSingleArticlePage(props) {
   const date = new Date(parseInt(props.article.date));
-
+  
   return (
     <article className="pt-3 pl-3 pr-4 w-100">
-      <h5 className="lead">{props.article.author}</h5>
+      {props.article.author.search("undefined") == -1 && <h5 className="lead">{props.article.author}</h5>}
       <h5 className="text-muted">{date.toUTCString()}</h5>
-      <img src={props.article.img} className={`${style.articleImg} mt-3 mb-3`} />
+      {props.article.img.length > 0 && <img src={props.article.img} className={`${style.articleImg} mt-3 mb-3`} />}
+      <h3 className="display-5">{props.article.title}</h3>
       <p className="lead">{props.article.text}</p>
       <hr /> 
     </article>
