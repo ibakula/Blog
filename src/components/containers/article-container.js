@@ -37,7 +37,7 @@ class ArticleContainer extends Component {
   render() {
     return (
       <ArticleView articleId={this.props.articleId} articles={this.props.articles} loaded={this.state.hasLoaded}>
-        <PopularSectionContainer loaded={this.state.hasLoaded} />
+        <PopularSectionContainer articleId={this.props.articleId} loaded={this.state.hasLoaded} />
       </ArticleView>
     );
   }

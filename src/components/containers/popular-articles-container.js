@@ -12,6 +12,12 @@ class PopularSectionContainer extends Component {
     api.getPopularArticles();
   }
 
+  componentDidUpdate(prevState) {
+    if (prevState.articleId != this.props.articleId) {
+      api.getPopularArticles();
+    }
+  }
+
   render() {
     return (
       <PopularSectionView loaded={this.props.loaded} articles={this.props.articles} />
