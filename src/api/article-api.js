@@ -6,6 +6,11 @@ export function getArticles(id) {
   return utility.getDataByIdFromApiWrapper('http://127.0.0.1:80/api/posts', id)
   .then(response => {
     const articles = [];
+    if ((Array.isArray(response.data) && response.data.length < 1) 
+      || (id != null && !('id' in response.data))) {
+      return articles;
+    }
+    
     if (id != null) {
       return finalizeData(response.data, true)
         .then(article => {
@@ -32,6 +37,10 @@ export function getArticles(id) {
     return Promise.reject(error);
   });
 };
+
+export function resetData() {
+  store.dispatch(store.dispatch(actions.getArticlesFail()));
+}
 
 /**
  * Utility functions

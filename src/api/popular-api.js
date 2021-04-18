@@ -1,9 +1,9 @@
 import * as actions from '../actions/popular-actions';
-import getDataForContainerType from './api-utility';
+import * as utility from './api-utility';
 import store from '../store';
 
 export function getPopularArticles() {
-  return getDataForContainerType('http://127.0.0.1:80', 'popular')
+  return utility.getDataForContainerType('http://127.0.0.1:80/api', 'posts/popular')
   .then(response => {
       store.dispatch(actions.getPopularArticlesSuccess(response.data));
       return response.data;
