@@ -2,7 +2,8 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import ArticleView from '../views/article-view';
 import PopularSectionView from '../views/popular-articles-view';
-import getArticles from '../../api/article-api';
+import * as api from '../../api/article-api';
+import getPopularArticles from '.../.../api/popular-api';
 import { connect } from 'react-redux';
 
 class ArticleContainer extends Component {
@@ -20,7 +21,8 @@ class ArticleContainer extends Component {
   }
 
   componentDidMount() {
-    getArticles()
+    api.getArticles()
+    .then(() => getPopularArticles())
     .finally(() => {
       this.setState({ hasLoaded: true });
     });
