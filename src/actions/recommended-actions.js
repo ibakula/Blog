@@ -1,14 +1,14 @@
 import * as actionTypes from './action-types';
 
-function getRecommendedArticlesSuccess(articles) {
+export function getRecommendedArticlesSuccess(articles) {
   return {
     type: actionTypes.UPDATE_RECOMMENDED_SECTION_SUCCESS,
     articles
   };
-}
+};
 
-function getRecommendedArticlesFail() {
+export function getRecommendedArticlesFail() {
   return {
     type: actionTypes.UPDATE_RECOMMENDED_SECTION_FAIL
   }
-}
+};

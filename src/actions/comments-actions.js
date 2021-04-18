@@ -1,14 +1,14 @@
 import * as actionTypes from './action-types';
 
-function getCommentsSuccess(articles) {
+export function getCommentsSuccess(articles) {
   return {
     type: actionTypes.UPDATE_ARTICLES_SUCCESS,
     articles
   };
-}
+};
 
-function getCommentsFail() {
+export function getCommentsFail() {
   return {
     type: actionTypes.UPDATE_ARTICLES_FAIL
   };
-}
+};
