@@ -17,9 +17,9 @@ class ArticleLayout extends Component {
     return (
       <>
         {localStorage.getItem("email") != null && <WelcomeStripeContainer />}
-        <ArticleContainer articleId={this.props.match.props.articleId} />
+        <ArticleContainer articleId={this.props.match.params.articleId} />
         <RecommendedSectionContainer />
-        <CommentSectionContainer articleId={this.props.match.props.articleId} />
+        <CommentSectionContainer articleId={this.props.match.params.articleId} />
       </>
     );
   }
