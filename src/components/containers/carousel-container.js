@@ -1,11 +1,16 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
+import * as api from '../../api/carousel-api';
 import CarouselView from '../views/carousel-view';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
 class CarouselComponent extends Component {
   static propTypes = {
     articles: PropTypes.array
+  }
+
+  componentDidMount() {
+    api.getCarouselData();
   }
 
   render() { 
@@ -16,13 +21,8 @@ class CarouselComponent extends Component {
 };
 
 function mapStateToProps(state) {
-  const cpArticles = [];
-  state.carouselState.map(article => {
-    cpArticles.push(Object.assign({}, article));
-  });
-
   return {
-    articles: cpArticles
+    articles: state.carouselState.slice()
   }; 
 }
 

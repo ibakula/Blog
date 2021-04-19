@@ -14,6 +14,10 @@ export const UPDATE_COMMENTS_FAIL = "UPDATE_COMMENTS_FAIL";
 export const UPDATE_ARTICLES_SUCCESS = "UPDATE_ARTICLES_SUCCESS";
 export const UPDATE_ARTICLES_FAIL = "UPDATE_ARTICLES_FAIL";
 
+// Carousel component actions
+export const UPDATE_CAROUSEL_SUCCESS = "UPDATE_CAROUSEL_SUCCESS";
+export const UPDATE_CAROUSEL_FAIL = "UPDATE_CAROUSEL_FAIL";
+
 // Search function actions (Navigation bar)
 export const INIT_SEARCH_FN = "INIT_SEARCH_FN";
 export const DISPLAY_RESULTS = "DISPLAY_RESULTS";
