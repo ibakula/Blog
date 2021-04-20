@@ -10,9 +10,9 @@ export default function CommentSectionView(props) {
         <Form>
           <Form.Group controlId="commentField">
             <Form.Label className="lead">Comment:</Form.Label>
-            <Form.Control className={`${style.textFieldSettings}`} as="textarea" rows="3" placeholder="Enter your comment here" required />
+            <Form.Control ref={props.textDataRef} className={`${style.textFieldSettings}`} as="textarea" rows="3" placeholder="Enter your comment here" required />
           </Form.Group>
-          <Button variant="primary">Comment</Button>
+          <Button onClick={props.onCommentSubmit} variant="primary">Comment</Button>
         </Form>
           {props.comments.map(comment => {
             const date = new Date(parseInt(comment.date));

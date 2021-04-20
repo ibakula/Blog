@@ -8,6 +8,7 @@ export const UPDATE_POPULAR_FAIL = "UPDATE_POPULAR_FAIL";
 
 // Comment component actions
 export const UPDATE_COMMENTS_SUCCESS = "UPDATE_COMMENTS_SUCCESS";
+export const UPDATE_COMMENTS_INSERT = "UPDATE_COMMENTS_INSERT";
 export const UPDATE_COMMENTS_FAIL = "UPDATE_COMMENTS_FAIL";
 
 // Aritcle component actions

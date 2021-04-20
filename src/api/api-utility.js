@@ -12,4 +12,8 @@ export function getDataForContainerType(url, sectionName, ...params) {
   }
 
   return axios.get(fullUrl);
+};
+
+export function postData(url, data) {
+  return axios.post(url, data);
 }
