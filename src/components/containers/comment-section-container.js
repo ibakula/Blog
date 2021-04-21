@@ -10,6 +10,9 @@ class CommentSectionContainer extends Component {
     super(props);
     this.dataRef = createRef();
     this.handleSubmitComment = this.handleSubmitComment.bind(this);
+    this.state = { listStartComment: 0 };
+    this.handleShowNextComments = this.handleShowNextComments.bind(this);
+    this.handleShowPreviousComments = this.handleShowPreviousComments.bind(this);
   }
 
   handleSubmitComment() {
@@ -37,13 +40,38 @@ class CommentSectionContainer extends Component {
     });
   }
 
+  handleShowNextComments(lastId) {
+    this.setState({ listStartComment: (lastId+1) });
+  }
+
+  handleShowPreviousComments(lastId) {
+    let newStateVal = (lastId - 9) < 0 ? 0 : lastId - 9;
+    this.setState({ listStartComment: newStateVal });
+  }
+
   componentDidMount() {
     api.getComments(this.props.articleId);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.articleId != this.props.articleId) {
+      this.setState({ listStartComment: 0 });
+      api.getComments(this.props.articleId);
+    }
+  }
+
+  componentWillUnmount() {
+    this.setState({ listStartComment: 0 });
+  }
+
   render() {
     return (
-      <CommentSectionView onCommentSubmit={this.handleSubmitComment} textDataRef={this.dataRef} comments={this.props.comments} />
+      <CommentSectionView startFromComment={this.state.listStartComment}
+        showPreviousComments={this.handleShowPreviousComments}
+        showNextComments={this.handleShowNextComments} 
+        onCommentSubmit={this.handleSubmitComment} 
+        textDataRef={this.dataRef} 
+        comments={this.props.comments} />
     );
   }
 }
