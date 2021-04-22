@@ -1,7 +1,6 @@
 import { Form, Button } from 'react-bootstrap';
 import style from './comment-section.module.css'
 import PropTypes from 'prop-types';
-import { Row, Col } from 'react-bootstrap';
 
 export default function CommentSectionView(props) {
   let elements = [];
@@ -27,8 +26,6 @@ export default function CommentSectionView(props) {
       break;
     }
   }
-
-  console.log(elements);
 
   return(
     <div className={`${style.bgSettings} p-sm-5 p-3 mt-sm-5 mt-3`}>
