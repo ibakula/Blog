@@ -19,9 +19,9 @@ export default function CommentSectionView(props) {
       const showNext = i < (props.comments.length-1);
       const showBoth = showPrev && showNext;
       elements.push(<div className="mt-3">
-        {showPrev && <a class="text-primary" onClick={props.showPreviousComments.bind(null, i)}>Show previous</a>}
+        {showPrev && <a class="text-primary" onClick={props.showPreviousComments.bind(null, i)}>Show newer</a>}
         {showBoth && <span class="ml-2 mr-2">|</span>}
-        {showNext && <a class="text-primary" onClick={props.showNextComments.bind(null, i)}>Show next</a>}
+        {showNext && <a class="text-primary" onClick={props.showNextComments.bind(null, i)}>Show older</a>}
         </div>);
       break;
     }
