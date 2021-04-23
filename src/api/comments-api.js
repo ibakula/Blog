@@ -4,9 +4,27 @@ import store from '../store';
 
 export function getComments(articleId) {
   return utility.getDataForContainerType('http://127.0.0.1:80/api', 'comments/post', articleId)
-  .then(response => {
-    store.dispatch(actions.getCommentsSuccess(response.data));
-    return response.data;
+  .then(({ data }) => {
+    let comments = JSON.stringify(data);
+    comments = JSON.parse(comments);
+    let promise = null;
+    comments.forEach((comment, index) => {
+      if (promise != null) {
+        promise = promise.then((response) => {
+          comment.author = `${response.data.first_name} ${response.data.last_name}`;
+          return utility.getDataForContainerType('http://127.0.0.1:80/api', 'users', comment.user_id);
+        });
+      }
+      else {
+        promise = utility.getDataForContainerType('http://127.0.0.1:80/api', 'users', comment.user_id);
+      }
+
+      if (index == (comments.length-1)) {
+        promise = promise.then(() => comments);
+        store.dispatch(actions.getCommentsSuccess(comments));
+      }
+    });
+    return promise;
   })
   .catch(error => {
     //actions.getCommentsFail();
