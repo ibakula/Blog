@@ -1,13 +1,14 @@
 import * as actionTypes from './action-types';
 
-export function getCommentsSuccess(comments) {
+export function getCommentsSuccess(comments, count) {
   return {
     type: actionTypes.UPDATE_COMMENTS_SUCCESS,
+    total: count,
     comments
   };
 };
 
-export function insertComment(comment) {
+export function insertComment(commentField) {
   return {
     type: action.UPDATE_COMMENTS_INSERT,
     comment

@@ -1,18 +1,18 @@
 import { Component, createRef } from 'react';
 import * as api from '../../api/comments-api';
-import { insertComment } from '../../actions/comments-actions';
+import * as config from './container-config';
 import CommentSectionView from '../views/comment-section-view';
+import CommentButtons from '../views/comment-buttons-view';
+import CommentView from '../views/comment-view';
+import GeneratedListContainer from './generated-list-container';
 import { connect } from 'react-redux';
-import store from '../../store';
 
 class CommentSectionContainer extends Component {
   constructor(props) {
     super(props);
     this.dataRef = createRef();
     this.handleSubmitComment = this.handleSubmitComment.bind(this);
-    this.state = { listStartComment: 0 };
-    this.handleShowNextComments = this.handleShowNextComments.bind(this);
-    this.handleShowPreviousComments = this.handleShowPreviousComments.bind(this);
+    this.handleLoadMore = this.handleLoadMore.bind(this);
   }
 
   handleSubmitComment() {
@@ -22,62 +22,43 @@ class CommentSectionContainer extends Component {
     }
 
     api.postComment(this.params.articleId, this.dataRef.current.value)
-    .then(() => {
-      api.getComments(this.props.articleId)
-      .catch(() => {
-        const comment = {
-          post_id: this.props.articleId,
-          text: this.dataRef.current.value,
-          author: localStorage.getItem("first_name") + " " + localStorage.getItem("last_name"),
-          date: Date.now()
-        };
-        store.dispatch(insertComment(comment));
-      });
-    })
+    .then(() => api.getCommentsCount(this.props.articleId))
+    .then(count => api.getComments(this.props.articleId, 0, config.COMMENT_MAX_ITEMS_PER_PAGE, count))
     .catch(error => {
       alert(`Posting failed, reason: ${erorr.message}`);
       throw error;
     });
   }
 
-  handleShowNextComments(lastId) {
-    this.setState({ listStartComment: (lastId+1) });
-  }
-
-  handleShowPreviousComments(lastId) {
-    let newStateVal = (lastId - 9) < 0 ? 0 : lastId - 9;
-    this.setState({ listStartComment: newStateVal });
+  handleLoadMore(commentId, type = 'fromId') {
+    return api.getCommentsCount(this.props.articleId)
+    .then(count => api.getComments(this.props.articleId, commentId, config.COMMENT_MAX_ITEMS_PER_PAGE, count, type));
   }
 
   componentDidMount() {
-    api.getComments(this.props.articleId);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.articleId != this.props.articleId) {
-      this.setState({ listStartComment: 0 });
-      api.getComments(this.props.articleId);
-    }
-  }
-
-  componentWillUnmount() {
-    this.setState({ listStartComment: 0 });
+    api.getCommentsCount(this.props.articleId)
+    .then(count => api.getComments(this.props.articleId, (count-config.COMMENT_MAX_ITEMS_PER_PAGE), config.COMMENT_MAX_ITEMS_PER_PAGE, count));
   }
 
   render() {
     return (
-      <CommentSectionView startFromComment={this.state.listStartComment}
-        showPreviousComments={this.handleShowPreviousComments}
-        showNextComments={this.handleShowNextComments} 
-        onCommentSubmit={this.handleSubmitComment} 
-        textDataRef={this.dataRef} 
-        comments={this.props.comments} />
+      <CommentSectionView onCommentSubmit={this.handleSubmitComment} 
+        textDataRef={this.dataRef}>
+        <GeneratedListContainer articleId={this.props.articleId}
+          count={this.props.count}
+          maxItemsPerPage={config.COMMENT_MAX_ITEMS_PER_PAGE}
+          originData={this.props.comments}
+          viewElement={CommentView}
+          controlElement={CommentButtons} 
+          loadMore={this.handleLoadMore} />
+      </CommentSectionView>
     );
   }
 }
 
 function mapStateToProps(store) {
   return {
+    count: store.commentsState.total,
     comments: store.commentsState.comments
   };
 }

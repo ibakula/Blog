@@ -1,0 +1,1 @@
+export const COMMENT_MAX_ITEMS_PER_PAGE = 10;
