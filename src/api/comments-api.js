@@ -42,8 +42,7 @@ export function getComments(articleId, commentId, limit, commentCount, type = 'f
 
     return promise === null ? Promise.resolve(comments) : promise;
   })
-  .then(comments => { 
-    console.log(comments);
+  .then(comments => {
     store.dispatch(actions.getCommentsSuccess(comments, commentCount));
     return comments;
   })
