@@ -63,17 +63,15 @@ function GeneratedArticle(props) {
     props.article.text.slice(0, 150) + "..." : props.article.text;
 
   return (
-    <Row className="mb-3">
-      <Card>
-        <Card.Body>
-          <Card.Title>
-            <Card.Img src={props.article.img} className={"mr-4 ml-2 " + style.imgRuleset} />
-            {shortenedTitle}
-          </Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">{date.toUTCString()}</Card.Subtitle>
-          <Card.Text className={style.textRuleset}>{shortenedText}</Card.Text>
-          <Link to={`/article/${props.article.id}`} className="card-link">Read more...</Link>
-        </Card.Body>
-      </Card>
-    </Row>);
+    <Card className="mb-3">
+      <Card.Body>
+        <Card.Title>
+          <Card.Img src={props.article.img} className={"mr-4 ml-2 " + style.imgRuleset} />
+          {shortenedTitle}
+        </Card.Title>
+        <Card.Subtitle className="mb-2 text-muted">{date.toUTCString()}</Card.Subtitle>
+        <Card.Text className={style.textRuleset}>{shortenedText}</Card.Text>
+        <Link to={`/article/${props.article.id}`} className="card-link">Read more...</Link>
+      </Card.Body>
+    </Card>);
 }
