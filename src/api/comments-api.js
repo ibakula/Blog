@@ -39,9 +39,11 @@ export function getComments(articleId, commentId, limit, commentCount, type = 'f
         promise = promise.then(() => comments);
       }
     });
-    return promise;
+
+    return promise === null ? Promise.resolve(comments) : promise;
   })
   .then(comments => { 
+    console.log(comments);
     store.dispatch(actions.getCommentsSuccess(comments, commentCount));
     return comments;
   })
