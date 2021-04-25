@@ -21,7 +21,7 @@ export default function RecommendedSectionView(props) {
                 <Card.Body>
                   <Card.Title className={`${style.titleRuleset}`}>{title}</Card.Title>
                   <Card.Text className={`${style.textRuleset}`}>{text}</Card.Text>
-                  <Link to={`/${article.id}`} class="card-link">Read more...</Link>
+                  <Link to={`/${article.id}`} className="card-link">Read more...</Link>
                 </Card.Body>
               </Card>
             </Col>
