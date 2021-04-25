@@ -22,11 +22,17 @@ class CommentSectionContainer extends Component {
     }
 
     api.postComment(this.params.articleId, this.dataRef.current.value)
+    .catch(error => {
+      alert(`Posting failed, reason: ${erorr.message}`);
+      return Promise.reject();
+    })
     .then(() => api.getCommentsCount(this.props.articleId))
     .then(count => api.getComments(this.props.articleId, 0, config.COMMENT_MAX_ITEMS_PER_PAGE, count))
     .catch(error => {
-      alert(`Posting failed, reason: ${erorr.message}`);
-      throw error;
+      if (!error) {
+        return;
+      }
+      alert(`There was an error updating comments section, try refreshing the page.`);
     });
   }
 
