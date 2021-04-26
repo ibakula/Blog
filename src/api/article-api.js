@@ -53,7 +53,7 @@ function finalizeData(article, fetchAuthor = false) {
   nArticle.text = textData.text;
   delete nArticle.views;
 
-  return (fetchAuthor ? utility.getDataByIdFromApiWrapper('http://localhost:80/api/users', article.authorId)
+  return (fetchAuthor ? utility.getDataByIdFromApiWrapper('http://127.0.0.1:80/api/users', article.author_id)
     .then(response => {
       nArticle.author = `${response.data.first_name} ${response.data.last_name}`;
       return nArticle;
