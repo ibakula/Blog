@@ -2,7 +2,7 @@ import { Component, createRef } from 'react';
 import * as api from '../../api/comments-api';
 import * as config from './container-config';
 import CommentSectionView from '../views/comment-section-view';
-import CommentButtons from '../views/comment-buttons-view';
+import CommentButtons from '../views/generated-list-buttons-view';
 import CommentView from '../views/comment-view';
 import GeneratedListContainer from './generated-list-container';
 import { connect } from 'react-redux';

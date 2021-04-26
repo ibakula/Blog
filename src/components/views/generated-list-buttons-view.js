@@ -1,6 +1,6 @@
-import style from './comment-buttons.module.css'
+import style from './generated-list-buttons.module.css'
 
-export default function CommentButtonsView(props) {
+export default function GeneratedListButtonsView(props) {
   return (
     <>
       {'showPreviousList' in props.item && <a className={`${style.cursor} text-primary`} onClick={props.item.showPreviousList}>Show newer</a>}
