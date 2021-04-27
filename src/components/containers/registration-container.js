@@ -23,7 +23,7 @@ class RegistrationContainer extends Component {
       password: ""
     }
 
-    const inputs = this.formRef.current.querySelector('input[id^="signup"]');
+    const inputs = this.formRef.current.querySelectorAll('input[id^="signup"]');
 
     data.firstName = inputs[0].value;
     data.lastName = inputs[1].value;
