@@ -26,7 +26,7 @@ class CommentSectionContainer extends Component {
     api.postComment(this.params.articleId, this.dataRef.current.value)
     .catch(error => {
       alert(`Posting failed, reason: ${erorr.message}`);
-      return Promise.reject(); // Skin updating comments, since it wasn't posted
+      return Promise.reject(); // Skip updating comments, since it wasn't posted
     })
     .then(() => api.getCommentsCount(this.props.articleId))
     .then(count => api.getComments(this.props.articleId, 0, config.COMMENT_MAX_ITEMS_PER_PAGE, count))

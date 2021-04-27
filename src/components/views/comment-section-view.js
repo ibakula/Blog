@@ -12,7 +12,7 @@ export default function CommentSectionView(props) {
             <Form.Label className="lead">Comment:</Form.Label>
             <Form.Control ref={props.textDataRef} className={`${style.textFieldSettings}`} as="textarea" rows="3" placeholder="Enter your comment here" required />
           </Form.Group>
-          <Button variant="primary">Comment</Button>
+          <Button type="submit" variant="primary">Comment</Button>
         </Form>
         {props.children}
       </div>
