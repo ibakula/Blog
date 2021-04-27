@@ -38,3 +38,13 @@ export function updateUserData(data) {
     }
   });
 };
+
+export function createAccount(userData) {
+  return utility.postData('http://127.0.0.1:80/api/users', userData)
+  .then(response => {
+    return response.data;
+  })
+  .catch(error => {
+    return Promise.reject(error);
+  });
+};
