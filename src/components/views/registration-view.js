@@ -24,7 +24,7 @@ export default function RegistrationView(props) {
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" placeholder="Password" className={style.rectifyFormCtrlItem} required />
           </Form.Group>
-          <Button variant="primary">Sign up!</Button>
+          <Button type="submit" variant="primary">Sign up!</Button>
         </Form>
         { props.success == false && <Alert variant="danger" className="p-4 mt-4 mr-3">Something went wrong:<br />Reason: {props.reason}</Alert> }
         { props.success == true && <Alert variant="success" className="p-4 mt-4 mr-3">Successfully signed up, redirecting to log-in..<DeferredRedirect to="/login" delay="5000" /></Alert> }
