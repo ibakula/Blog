@@ -7,12 +7,12 @@ export default function CommentSectionView(props) {
     <div className={`${style.bgSettings} p-sm-5 p-3 mt-sm-5 mt-3`}>
       <h3>Comments section</h3>
       <div className="pl-sm-2">
-        <Form>
+        <Form onSubmit={props.onCommentSubmit}>
           <Form.Group controlId="commentField">
             <Form.Label className="lead">Comment:</Form.Label>
             <Form.Control ref={props.textDataRef} className={`${style.textFieldSettings}`} as="textarea" rows="3" placeholder="Enter your comment here" required />
           </Form.Group>
-          <Button onClick={props.onCommentSubmit} variant="primary">Comment</Button>
+          <Button variant="primary">Comment</Button>
         </Form>
         {props.children}
       </div>
