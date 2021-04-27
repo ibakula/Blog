@@ -9,11 +9,11 @@ export default function RegistrationView(props) {
         <Form className="ml-3">
           <Form.Group>
             <Form.Label>First name:</Form.Label>
-            <Form.Control type="text" placeholder="Your first name" className={style.rectifyFormCtrlItem} required />
+            <Form.Control type="text" placeholder="First name" className={style.rectifyFormCtrlItem} required />
           </Form.Group>
           <Form.Group>
             <Form.Label>Last name</Form.Label>
-            <Form.Control type="text" placeholder="Your last name, surname or family name" className={style.rectifyFormCtrlItem} required />
+            <Form.Control type="text" placeholder="Last name, surname or family name" className={style.rectifyFormCtrlItem} required />
           </Form.Group>
           <Form.Group>
             <Form.Label>E-mail address</Form.Label>
@@ -21,7 +21,7 @@ export default function RegistrationView(props) {
           </Form.Group>
           <Form.Group>
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Desired password" className={style.rectifyFormCtrlItem} required />
+            <Form.Control type="password" placeholder="Password" className={style.rectifyFormCtrlItem} required />
           </Form.Group>
           <Button variant="primary">Sign up!</Button>
         </Form>
