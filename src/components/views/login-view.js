@@ -6,7 +6,7 @@ export default function LoginView(props) {
     <Row noGutters={true} className="mt-sm-5 mt-3 pl-sm-5 pl-3">
       <Col md={8}>
         <h3>User log-in:</h3>
-        <Form className="ml-3">
+        <Form className="ml-3 pr-3">
           <Form.Group controlId="loginFormEmail">
             <Form.Label>User E-mail address:</Form.Label>
             <Form.Control className={style.rectifyFormCtrlItem} type="email" placeholder="E-mail address" required />

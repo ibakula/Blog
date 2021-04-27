@@ -6,7 +6,7 @@ export default function RegistrationView(props) {
     <Row noGutters={true} className="mt-sm-5 mt-3 pl-sm-5 pl-3">
       <Col md={8}>
         <h3>Registration form:</h3>
-        <Form className="ml-3">
+        <Form className="ml-3 pr-3">
           <Form.Group>
             <Form.Label>First name:</Form.Label>
             <Form.Control type="text" placeholder="First name" className={style.rectifyFormCtrlItem} required />
