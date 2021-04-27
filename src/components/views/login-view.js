@@ -1,10 +1,9 @@
 import { Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import style from './form-rules.module.css';
-import { Redirect } from 'react-router-dom';
-import { useState } from 'react';
+import DeferredRedirect from './deferred-redirect-view';
 
 export default function LoginView(props) {
-  return (      
+  return (
     <Row noGutters={true} className="mt-sm-5 mt-3 pl-sm-5 pl-3">
       <Col md={8}>
         <h3>User log-in:</h3>
@@ -23,7 +22,7 @@ export default function LoginView(props) {
           props.success == false && <Alert variant="danger" className="p-4 mt-4 mr-3">Failed to login<br />Reason: {props.reason}</Alert>
         }
         {
-          props.success == true && <Alert variant="success" className="p-4 mt-4 mr-3">You have loggedd in, redirecting...<DeferredRedirect /></Alert>
+          props.success == true && <Alert variant="success" className="p-4 mt-4 mr-3">You have loggedd in, redirecting...<DeferredRedirect to="/" delay="5000" /></Alert>
         }
       </Col>
       <Col md={4} className="mt-md-0 mt-4">
@@ -32,11 +31,3 @@ export default function LoginView(props) {
     </Row>
   );
 };
-
-function DeferredRedirect() {
-  const [ redirect, setRedirect ] = useState(false);
-  setTimeout(() => { setRedirect(true) }, 5000);
-  return (
-    redirect && <Redirect to="/" />
-  );
-}
