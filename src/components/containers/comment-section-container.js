@@ -15,7 +15,9 @@ class CommentSectionContainer extends Component {
     this.handleLoadMore = this.handleLoadMore.bind(this);
   }
 
-  handleSubmitComment() {
+  handleSubmitComment(e) {
+    e.preventDefault();
+    
     if (localStorage.getItem("id") == null) {
       alert("Please log in first.");
       return;
