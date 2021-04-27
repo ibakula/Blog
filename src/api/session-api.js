@@ -48,3 +48,21 @@ export function createAccount(userData) {
     return Promise.reject(error);
   });
 };
+
+export function logout() {
+  return utility.getDataForContainerType("http://127.0.0.1:80/api/user/logout")
+  .then(response => {
+    if (response.data.search(/success/i) != -1) {
+      localStorage.removeItem("id");
+      localStorage.removeItem("first_name");
+      localStorage.removeItem("last_name");
+      localStorage.removeItem("permissions");
+      localStorage.removeItem("login_date");
+      localStorage.removeItem("email");
+    }
+    return response.data;
+  })
+  .catch(error => {
+    return Promise.reject(error);
+  });
+};
