@@ -33,7 +33,7 @@ export default class MainLayout extends Component {
           <Route exact path="/profile" component={Profile}>
             {localStorage.getItem("email") == null && <Redirect to="/404" />}
           </Route>
-          <Route path="/profile/:userId" component={Profile} />
+          <Route path="/profile/:userId(\d+)" component={Profile} />
           <Route exact path="/404" component={ErrorLayouts.PageNotFound} />
           <Route path="/article/:articleId(\d+)" component={Article} />
           <Route path="*" component={ErrorLayouts.PageNotFound} />
