@@ -1,12 +1,12 @@
 import { Component } from 'react';
 import RegistrationView from '../views/registration-view';
-import PopularSectionView from '../views/popular-articles-view';
+import PopularSectionContainer from './popular-articles-container';
 
 class RegistrationContainer extends Component {
   render() {
     return (
       <RegistrationView>
-        <PopularSectionView />
+        <PopularSectionContainer />
       </RegistrationView>
     );
   }

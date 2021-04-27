@@ -3,7 +3,7 @@ import style from './popular-articles.module.css';
 import { Link } from 'react-router-dom';
 import * as ErrorLayouts from '../layouts/404-layout';
 
-export default function PopularArticles(props) {
+export default function PopularArticlesView(props) {
   return (
     <>
       <Card.Body className="pt-3 pb-0">
