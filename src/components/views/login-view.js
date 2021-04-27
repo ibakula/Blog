@@ -16,7 +16,7 @@ export default function LoginView(props) {
             <Form.Label>Password:</Form.Label>
             <Form.Control className={style.rectifyFormCtrlItem} type="password" placeholder="E-mail address" required />
           </Form.Group>
-          <Button variant="primary">Log in</Button>
+          <Button type="submit" variant="primary">Log in</Button>
         </Form>
         {
           props.success == false && <Alert variant="danger" className="p-4 mt-4 mr-3">Failed to login<br />Reason: {props.reason}</Alert>
