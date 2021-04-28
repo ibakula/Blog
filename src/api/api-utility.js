@@ -22,4 +22,14 @@ export function postData(url, data) {
   }
 
   return axios.post(url, params);
+};
+
+export function putData(url, data) {
+  const params = new URLSearchParams();
+  
+  for (const name in data) {
+    params.append(name, data[name]);
+  }
+  
+  return axios.put(url, params);
 }

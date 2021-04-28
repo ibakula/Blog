@@ -20,7 +20,7 @@ export default function ProfileView(props) {
   }
 
   return (
-    <Form className={`pt-sm-5 pt-3 pb-sm-5 pb-3 pl-sm-5 pl-3 pr-sm-5 pr-3 ${style.bgLight}`}>
+    <Form onSubmit={props.formRef} className={`pt-sm-5 pt-3 pb-sm-5 pb-3 pl-sm-5 pl-3 pr-sm-5 pr-3 ${style.bgLight}`}>
       <Form.Row>
         <Form.Group className="col-sm-6" controlId="regFirstName">
           <Form.Label>First name:</Form.Label>
@@ -49,7 +49,7 @@ export default function ProfileView(props) {
       </Form.Row>
       <Form.Row>
         <Col>
-          <Button variant="primary">Apply changes!</Button>
+          <Button type="submit" variant="primary">Apply changes!</Button>
         </Col>
       </Form.Row>
     </Form>

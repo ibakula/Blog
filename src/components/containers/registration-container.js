@@ -17,16 +17,16 @@ class RegistrationContainer extends Component {
     e.preventDefault();
 
     const data = {
-      firstName: "",
-      lastName: "",
+      first_name: "",
+      last_name: "",
       email: "",
       password: ""
-    }
+    };
 
     const inputs = this.formRef.current.querySelectorAll('input[id^="signup"]');
 
-    data.firstName = inputs[0].value;
-    data.lastName = inputs[1].value;
+    data.first_name = inputs[0].value;
+    data.last_name = inputs[1].value;
     data.email = inputs[2].value;
     data.password = inputs[3].value;
 
