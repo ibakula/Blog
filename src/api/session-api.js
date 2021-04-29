@@ -72,7 +72,7 @@ export function alterUserData(data) {
   return utility.putData(`http://127.0.0.1:80/api/users/${id}`, data)
   .then(response => {
     if (response.data.result.search(/success/i) != -1) {
-      for(let prop in data) {
+      for (const prop in data) {
         localStorage.setItem(prop, data[prop]);
       }
     }

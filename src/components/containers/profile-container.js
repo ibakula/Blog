@@ -2,7 +2,7 @@ import { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import ProfileView from '../views/profile-view';
 import { withRouter } from "react-router";
-
+import * as api from '../../api/session-api';
 
 class ProfileContainer extends Component {
   static propTypes = {
@@ -16,6 +16,7 @@ class ProfileContainer extends Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.formRef = createRef();
+    this.state = { altered: null };
   }
 
   handleSubmit(e) {
@@ -29,14 +30,28 @@ class ProfileContainer extends Component {
       }
     });
 
-    
+    api.alterUserData(data)
+    .then(data => {
+      if (data.result.search(/success/i) != -1) {
+        this.setState({ altered: true });
+      }
+      else {
+        this.setState({ altered: false, reason: ('reason' in data ? data.reason : "Something went wrong with your request. Try again later.") });
+      }
+    })
+    .catch(error => {
+      this.setState({ altered: false, reason: "Something went wrong with your request. Try again later." })
+    });
   }
 
   render() {
     return (
       <ProfileView formRef={this.formRef} 
+        onSubmit={this.handleSubmit}
         userId={this.props.match.params.userId} 
-        userData={this.props.userData} />
+        userData={this.props.userData}
+        altered={this.state.altered}
+        reason={this.state.reason} />
     );
   }
 }
