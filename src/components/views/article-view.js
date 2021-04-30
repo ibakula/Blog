@@ -4,7 +4,6 @@ import style from './article.module.css';
 import * as ErrorLayouts from '../layouts/404-layout';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 
 export default function ArticleView(props) {
   let elements = null;
