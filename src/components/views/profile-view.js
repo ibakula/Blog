@@ -11,7 +11,8 @@ export default function ProfileView(props) {
     if (props.userData.id != props.userId) {
       return null;
     }
-    return (<div className={`w-100 pt-sm-5 pt-3 pb-sm-5 pb-3 pl-sm-5 pl-3 pr-sm-5 pr-3 ${style.bgDark}`}>
+    return (
+      ('id' in props.userData && props.userData.id == props.profileId) && <div className={`w-100 pt-sm-5 pt-3 pb-sm-5 pb-3 pl-sm-5 pl-3 pr-sm-5 pr-3 ${style.bgDark}`}>
         <h3 className="display-4">{`${props.userData.first_name} ${props.userData.last_name}`}</h3>
         <p className="lead">{displayPermissions(props.userData.permissions) + " since " + date.toLocaleDateString()}</p>
         <hr className="my-4" />

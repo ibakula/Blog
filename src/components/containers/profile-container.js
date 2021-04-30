@@ -1,7 +1,8 @@
 import { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import ProfileView from '../views/profile-view';
-import { withRouter } from "react-router";
+import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
 import * as api from '../../api/session-api';
 
 class ProfileContainer extends Component {
@@ -51,9 +52,16 @@ class ProfileContainer extends Component {
         userId={this.props.match.params.userId} 
         userData={this.props.userData}
         altered={this.state.altered}
-        reason={this.state.reason} />
+        reason={this.state.reason}
+        profileId={this.props.match.params.userId} />
     );
   }
 }
 
-export default withRouter(ProfileContainer);
+function mapStateToProps(store) {
+  return {
+    userData: store.profileState.userData
+  };
+}
+
+export default connect(mapStateToProps)(withRouter(ProfileContainer));

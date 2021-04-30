@@ -7,6 +7,7 @@ import articleReducer from './article-reducer';
 import popularArticlesReducer from './popular-section-reducer';
 import commentsReducer from './comments-reducer';
 import recommendedArticlesReducer from './recommended-section-reducer';
+import profileReducer from './profile-reducer';
 
 var reducers = combineReducers({
   searchState: searchReducer,
@@ -14,7 +15,8 @@ var reducers = combineReducers({
   articleState: articleReducer,
   popularState: popularArticlesReducer,
   commentsState: commentsReducer,
-  recommendedState: recommendedArticlesReducer
+  recommendedState: recommendedArticlesReducer,
+  profileState: profileReducer
 });
 
 export default reducers;
