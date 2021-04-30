@@ -28,7 +28,7 @@ class PopularSectionContainer extends Component {
 function mapStateToProps(store) {
   return {
     articles: store.popularState.articles
-  }
+  };
 }
 
 export default connect(mapStateToProps)(PopularSectionContainer);

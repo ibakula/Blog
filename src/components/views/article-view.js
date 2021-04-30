@@ -12,9 +12,6 @@ export default function ArticleView(props) {
 
   if (props.loaded) {
     if (props.articles.length < 1 || !('id' in props.articles[0])) {
-      if (Number.isSafeInteger(articleId)) {
-        return <Redirect to="/404" />;
-      }
       elements = <ErrorLayouts.ContentNotFound />;
     }
     else if (!Number.isSafeInteger(articleId)) {

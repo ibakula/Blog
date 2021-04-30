@@ -46,7 +46,7 @@ class ArticleContainer extends Component {
 function mapStateToProps(store) {
   return {
     articles: store.articleState.articles
-  }
+  };
 }
 
 export default connect(mapStateToProps)(ArticleContainer);
