@@ -1,6 +1,6 @@
 import * as actionTypes from '../actions/action-types';
 
-const initialState =  {
+const initialState = {
   articles: []
 };
 

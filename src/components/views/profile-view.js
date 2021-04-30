@@ -1,20 +1,26 @@
+import { Redirect } from 'react-router-dom';
 import { Form, Button, Col, Alert } from 'react-bootstrap';
 import style from './profile.module.css';
 
 export default function ProfileView(props) {
-  let date = null;
-  if (props.userData != null && 'signup_date' in props.userData) {
-    date = new Date(parseInt(props.userData.signup_date));
-  }
+  let userId = parseInt(props.userId);
 
-  if ('userId' in props && props.userId != null) {
-    if (props.userData.id != props.userId) {
+  if (Number.isSafeInteger(userId)) {
+    if (props.updated == false) {
+      return <Redirect to="/404" />;
+    }
+
+    if (!('id' in props.userData) || props.userData.id != props.userId) {
       return null;
     }
+
+    let date = new Date(parseInt(props.userData.signup_date));
+    let permissions = displayPermissions(props.userData.permissions);
+
     return (
-      ('id' in props.userData && props.userData.id == props.profileId) && <div className={`w-100 pt-sm-5 pt-3 pb-sm-5 pb-3 pl-sm-5 pl-3 pr-sm-5 pr-3 ${style.bgDark}`}>
+      <div className={`w-100 pt-sm-5 pt-3 pb-sm-5 pb-3 pl-sm-5 pl-3 pr-sm-5 pr-3 ${style.bgDark}`}>
         <h3 className="display-4">{`${props.userData.first_name} ${props.userData.last_name}`}</h3>
-        <p className="lead">{displayPermissions(props.userData.permissions) + " since " + date.toLocaleDateString()}</p>
+        <p className="lead">{(permissions != "Member" ? `${permissions} and a member` : permissions) + " since " + date.toLocaleDateString()}</p>
         <hr className="my-4" />
       </div>
     );
@@ -55,8 +61,8 @@ export default function ProfileView(props) {
           </Col>
         </Form.Row>
       </Form>
-      { (props.altered == true && <Alert variant="success" className="mt-3 pl-sm-5 pl-3 pr-sm-5 pr-3">Saved!</Alert>) || 
-      (props.altered == false && <Alert variant="danger" className="mt-3 pl-sm-5 pl-3 pr-sm-5 pr-3">The settings have not been saved.<br />Reason: {props.reason}</Alert>) }
+      { (props.updated == true && <Alert variant="success" className="mt-3 pl-sm-5 pl-3 pr-sm-5 pr-3">Saved!</Alert>) || 
+      (props.updated == false && <Alert variant="danger" className="mt-3 pl-sm-5 pl-3 pr-sm-5 pr-3">The settings have not been saved.<br />Reason: {props.reason}</Alert>) }
     </>
   );
 };

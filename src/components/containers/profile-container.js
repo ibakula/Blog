@@ -4,6 +4,7 @@ import ProfileView from '../views/profile-view';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import * as api from '../../api/session-api';
+import * as profileApi from '../../api/profile-api';
 
 class ProfileContainer extends Component {
   static propTypes = {
@@ -17,7 +18,7 @@ class ProfileContainer extends Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.formRef = createRef();
-    this.state = { altered: null };
+    this.state = { updated: null };
   }
 
   handleSubmit(e) {
@@ -34,24 +35,58 @@ class ProfileContainer extends Component {
     api.alterUserData(data)
     .then(data => {
       if (data.result.search(/success/i) != -1) {
-        this.setState({ altered: true });
+        this.setState({ updated: true });
       }
       else {
-        this.setState({ altered: false, reason: ('reason' in data ? data.reason : "Something went wrong with your request. Try again later.") });
+        this.setState({ updated: false, reason: ('reason' in data ? data.reason : "Something went wrong with your request. Try again later.") });
       }
     })
-    .catch(error => {
-      this.setState({ altered: false, reason: "Something went wrong with your request. Try again later." })
+    .catch(() => {
+      this.setState({ updated: false, reason: "Something went wrong with your request. Try again later." })
+    });
+  }
+  
+  componentDidMount() {
+    if (!('userId' in this.props.match.params)) {
+      return;
+    }
+
+    profileApi.getProfileById(this.props.match.params.userId)
+    .then(data => {
+      if (Array.isArray(data) || !('id' in data)) {
+        this.setState({ updated: false })
+      }
+    })
+    .catch(() => {
+      this.setState({ updated: false })
     });
   }
 
+  componentDidUpdate(prevProps) {
+    if (!('userId' in this.props.match.params) || 
+      this.props.match.params.userId == prevProps.match.params.userId) {
+      return;
+    }
+
+    profileApi.getProfileById(this.props.match.params.userId)
+    .then(data => {
+      if (Array.isArray(data) || !('id' in data)) {
+        this.setState({ updated: false })
+      }
+    })
+    .catch(() => {
+      this.setState({ updated: false })
+    });
+  }
+  
   render() {
+    console.log(this.props.userData);
     return (
       <ProfileView formRef={this.formRef} 
         onSubmit={this.handleSubmit}
         userId={this.props.match.params.userId} 
         userData={this.props.userData}
-        altered={this.state.altered}
+        updated={this.state.updated}
         reason={this.state.reason}
         profileId={this.props.match.params.userId} />
     );
@@ -59,6 +94,7 @@ class ProfileContainer extends Component {
 }
 
 function mapStateToProps(store) {
+  console.log(store);
   return {
     userData: store.profileState.userData
   };
