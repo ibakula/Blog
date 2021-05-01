@@ -1,4 +1,6 @@
 import * as utility from './api-utility';
+import store from '../store';
+import * as navigationBarActions from '../actions/navigation-actions';
 
 export function login(userData) {
   return utility.postData('/api/user/login', userData)
@@ -13,7 +15,10 @@ export function login(userData) {
         return Promise.reject(new Error("Cookie wasn't saved"));
       }
       return updateUserData(data)
-      .then(() => response.data); 
+      .then(userData => {
+        store.dispatch(navigationBarActions.loginSuccess());
+        return userData;
+      }); 
     });
   })
   .catch(error => {
@@ -36,7 +41,7 @@ export function updateUserData(data) {
     localStorage.setItem(prop, data[prop]);
   }
 
-  return Promise.resolve();
+  return Promise.resolve(data);
 };
 
 export function createAccount(userData) {
@@ -59,6 +64,7 @@ export function logout() {
       localStorage.removeItem("permissions");
       localStorage.removeItem("login_date");
       localStorage.removeItem("email");
+      store.dispatch(navigationBarActions.logoutSuccess());
     }
     return response.data;
   })
