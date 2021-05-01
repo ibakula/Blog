@@ -1,7 +1,6 @@
 import { Component, createRef } from 'react';
 import * as api from '../../api/session-api';
 import RegistrationView from '../views/registration-view';
-import PopularSectionContainer from './popular-articles-container';
 
 class RegistrationContainer extends Component {
   constructor(props) {
@@ -25,15 +24,15 @@ class RegistrationContainer extends Component {
 
     const inputs = this.formRef.current.querySelectorAll('input[id^="signup"]');
 
-    data.first_name = inputs[0].value;
-    data.last_name = inputs[1].value;
+    data.firstName = inputs[0].value;
+    data.lastName = inputs[1].value;
     data.email = inputs[2].value;
     data.password = inputs[3].value;
 
     api.createAccount(data)
     .then(data => {
       if (data.result.search(/success/i) != -1) {
-        this.setState({ success: true, reason: data.reason });
+        this.setState({ success: true });
       }
       else {
         this.setState({ success: false, reason: data.reason });
@@ -49,9 +48,7 @@ class RegistrationContainer extends Component {
       <RegistrationView formRef={this.formRef}
         success={this.state.success} 
         reason={this.state.reason}
-        onSignup={this.handleRegister}>
-        <PopularSectionContainer />
-      </RegistrationView>
+        onSignup={this.handleRegister} />
     );
   }
 };
