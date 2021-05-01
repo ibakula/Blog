@@ -6,9 +6,9 @@ const initialState =  {
 
 function reducer(state = initialState, action) {
   
-  switch(action.type) {
+  switch (action.type) {
     case actionTypes.UPDATE_RECOMMENDED_SECTION_SUCCESS:
-      return Object.assign({}, { articles: [...action.articles] });
+      return { articles: [...action.articles] };
     case actionTypes.UPDATE_RECOMMENDED_SECTION_FAIL:
       return initialState;
   }

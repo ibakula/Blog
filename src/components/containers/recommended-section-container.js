@@ -4,8 +4,9 @@ import RecommendedSectionView from '../views/recommended-section-view';
 import { connect } from 'react-redux';
 
 class RecommendedSectionContainer extends Component {
-  componentDidUpdate() {
-    if (this.props.categoryId == null) {
+  componentDidUpdate(prevProps) {
+    if (this.props.categoryId == null || 
+      this.props.articleId != prevProps.articleId) {
       return;
     }
 
@@ -14,7 +15,7 @@ class RecommendedSectionContainer extends Component {
 
   render() {
     return (
-      <RecommendedSectionView articles={this.props.articles} />
+      <RecommendedSectionView articleId={this.props.articleId} articles={this.props.articles} />
     );
   }
 };

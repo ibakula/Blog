@@ -7,27 +7,29 @@ import PropTypes from 'prop-types';
 export default function RecommendedSectionView(props) {
   let elements = null;
   if (props.articles != null) {
-    if (props.articles.length == 0) {
-      elements = <ErrorLayouts.ContentNotFound />;
-    }
-    else if (props.articleId == props.articles[0].id) {
-      elements = props.articles.map(article => {
-          let title = article.title.length > 30 ? article.title.slice(0, 30) + "..." : article.title;
-          let text = article.text.length > 130 ? article.text.slice(0, 130) + "..." : article.text;
-          return (
-            <Col xs={"auto"} className="mt-3 mr-3">
-              <Card className={`${style.articleRuleset}`}>
-                <Card.Img variant="top" src="https://cdn.pixabay.com/photo/2014/05/02/23/46/bridge-336475_960_720.jpg" alt="Image" />
-                <Card.Body>
+    elements = [];
+    props.articles.forEach(article => {
+      if (article.id == props.articleId) {
+        return;
+      }
+
+      let title = article.title.length > 30 ? article.title.slice(0, 30) + "..." : article.title;
+      let text = article.text.length > 130 ? article.text.slice(0, 130) + "..." : article.text;
+      elements.push(
+        <Col xs={"auto"} className="mt-3 mr-3">
+          <Card className={`${style.articleRuleset}`}>
+            <Card.Img variant="top" src="https://cdn.pixabay.com/photo/2014/05/02/23/46/bridge-336475_960_720.jpg" alt="Image" />
+            <Card.Body>
                   <Card.Title className={`${style.titleRuleset}`}>{title}</Card.Title>
                   <Card.Text className={`${style.textRuleset}`}>{text}</Card.Text>
                   <Link to={`/${article.id}`} className="card-link">Read more...</Link>
-                </Card.Body>
-              </Card>
-            </Col>
-          );
-        }
-      );
+            </Card.Body>
+            </Card>
+        </Col>);
+    });
+
+    if (elements.length == 0) {
+      elements = <ErrorLayouts.ContentNotFound />;
     }
   }
 
