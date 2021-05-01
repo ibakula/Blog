@@ -1,11 +1,10 @@
-import { Component } from 'react';
 import PropTypes from 'prop-types';
 import Carousel from 'react-bootstrap/Carousel';
 import style from './carousel.module.css';
 
 export default function CarouselView(props) {
   return (
-    <Carousel className={style.carouselRuleset} controls={false} interval={5000} pause={'hover'} slide={true}>
+    props.articles.length > 0 && <Carousel className={style.carouselRuleset} controls={false} interval={5000} pause={'hover'} slide={true}>
       {props.articles.map(article => {
         return (
           <Carousel.Item className={style.carouselItemRuleset}>
@@ -19,4 +18,8 @@ export default function CarouselView(props) {
       })}
     </Carousel>
   );
+};
+
+CarouselView.propTypes = {
+  articles: PropTypes.array
 };
