@@ -13,7 +13,7 @@ export default function NavigationBarView(props) {
         </Nav>
         <Nav className="mr-2">
         {
-          props.loggedOut == false ? 
+          localStorage.getItem("email") != null ? 
           <Link onClick={props.onLogout} to="#root" className="nav-link">Logout</Link> :
           (<><Link to="/login" className="nav-link">Login</Link>
           <Link to="/register" className="nav-link">Register</Link></>)
