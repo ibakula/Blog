@@ -39,7 +39,7 @@ export function getArticles(id) {
 };
 
 export function resetData() {
-  store.dispatch(store.dispatch(actions.getArticlesFail()));
+  store.dispatch(actions.getArticlesFail());
 }
 
 /**
@@ -47,7 +47,7 @@ export function resetData() {
  */
 
 function finalizeData(article, fetchAuthor = false) {
-  const textData = splitTextData(article.text);
+  const textData = utility.splitTextData(article.text);
   const nArticle = Object.assign({}, article);
   nArticle.img = textData.img;
   nArticle.text = textData.text;
@@ -58,28 +58,6 @@ function finalizeData(article, fetchAuthor = false) {
       nArticle.author = `${response.data.first_name} ${response.data.last_name}`;
       return nArticle;
     }) : Promise.resolve(nArticle));
-}
-
-function splitTextData(text) {
-  const data = {
-    img: '',
-    text
-  }
-
-  const start = data.text.search("<img");
-  if (start > -1) {
-    const end = data.text.search("/>");
-    data.img = data.text.slice(start, end+2);
-    if (start > 0) {
-      data.text = text.slice(0, start);
-      data.text = text.slice(end);
-    }
-    else {
-      data.text = data.text.slice(end+2);
-    }
-  }
-
-  return data;
 }
 
 function fetchArticlesFromId(startId) {

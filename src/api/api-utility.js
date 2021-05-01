@@ -32,4 +32,26 @@ export function putData(url, data) {
   }
   
   return axios.put(url, params);
-}
+};
+
+export function splitTextData(text) {
+  const data = {
+    img: '',
+    text
+  }
+
+  const start = data.text.search("<img");
+  if (start > -1) {
+    const end = data.text.search("/>");
+    data.img = data.text.slice(start, end+2);
+    if (start > 0) {
+      data.text = text.slice(0, start);
+      data.text = text.slice(end);
+    }
+    else {
+      data.text = data.text.slice(end+2);
+    }
+  }
+
+  return data;
+};
