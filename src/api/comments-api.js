@@ -61,7 +61,7 @@ export function postComment(articleId, text) {
 
   return utility.postData('/api/comments', data)
   .then(response => {
-    if (response.data.result == "Failed!") {
+    if (response.data.result.search(/failed/i) != -1) {
       const reason = 'reason' in response.data ? response.data.reason : "Reason is unknown.";
       return Promise.reject(new Error(reason));
     }
