@@ -23,11 +23,15 @@ class ProfileContainer extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const props = [ "first_name", "last_name", "email", "password" ];
+    const props = [ "firstName", "lastName", "email", "password" ];
+    const localProps = [ "first_name", "last_name", "email", "password" ];
     const inputs = this.formRef.current.querySelectorAll('input[id^="reg"]');
     const data = { };
     props.forEach((val, index) => {
-      if (inputs[index].value != localStorage.getItem(val)) {
+      if (inputs[index].value.length == 0) {
+        return;
+      }
+      if (inputs[index].value != localStorage.getItem(localProps[index])) {
         data[val] = inputs[index].value;
       }
     });
@@ -80,7 +84,6 @@ class ProfileContainer extends Component {
   }
   
   render() {
-    console.log(this.props.userData);
     return (
       <ProfileView formRef={this.formRef} 
         onSubmit={this.handleSubmit}
@@ -94,7 +97,6 @@ class ProfileContainer extends Component {
 }
 
 function mapStateToProps(store) {
-  console.log(store);
   return {
     userData: store.profileState.userData
   };

@@ -71,11 +71,17 @@ export function logout() {
 
 export function alterUserData(data) {
   const id = localStorage.getItem("id");
-  return utility.putData(`http://127.0.0.1:80/api/users/${id}`, data)
+  return utility.putData(`/api/users/${id}`, data)
   .then(response => {
     if (response.data.result.search(/success/i) != -1) {
       for (const prop in data) {
-        localStorage.setItem(prop, data[prop]);
+        let prop2 = prop;
+        let pos = prop2.search("Name");
+        if (pos != -1) {
+          prop2 = prop2.slice(0, pos);
+          prop2 += "_name";
+        }
+        localStorage.setItem(prop2, data[prop]);
       }
     }
     return response.data;

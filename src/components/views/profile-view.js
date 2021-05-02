@@ -16,7 +16,7 @@ export default function ProfileView(props) {
 
     let date = new Date(parseInt(props.userData.signup_date));
     let permissions = displayPermissions(props.userData.permissions);
-
+    
     return (
       <div className={`w-100 pt-sm-5 pt-3 pb-sm-5 pb-3 pl-sm-5 pl-3 pr-sm-5 pr-3 ${style.bgDark}`}>
         <h3 className="display-4">{`${props.userData.first_name} ${props.userData.last_name}`}</h3>
@@ -26,33 +26,35 @@ export default function ProfileView(props) {
     );
   }
 
+  console.log(localStorage.getItem("first_name"));
+
   return (
     <>
       <Form onSubmit={props.onSubmit} ref={props.formRef} className={`pt-sm-5 pt-3 pb-sm-5 pb-3 pl-sm-5 pl-3 pr-sm-5 pr-3 ${style.bgLight}`}>
         <Form.Row>
           <Form.Group className="col-sm-6" controlId="regFirstName">
             <Form.Label>First name:</Form.Label>
-            <Form.Control type="text" placeholder="First name" required>{localStorage.getItem("first_name")}</Form.Control>
+            <Form.Control type="text" placeholder="First name" />
           </Form.Group>
           <Form.Group className="col-sm-6" controlId="regLastName">
             <Form.Label>Last name:</Form.Label>
-            <Form.Control type="text" placeholder="Surname" required>{localStorage.getItem("last_name")}</Form.Control>
+            <Form.Control type="text" placeholder="Surname" />
           </Form.Group>
         </Form.Row>
         <Form.Row>
           <Form.Group className="col-sm-6" controlId="regEmail">
             <Form.Label>E-mail:</Form.Label>
-            <Form.Control type="email" placeholder="New e-mail address" required>{localStorage.getItem("email")}</Form.Control>
+            <Form.Control type="email" placeholder="New e-mail address" />
           </Form.Group>
           <Form.Group className="col-sm-6" controlId="regPassword">
             <Form.Label>Password:</Form.Label>
-            <Form.Control type="password" placeholder="New password" required />
+            <Form.Control type="password" placeholder="New password" />
           </Form.Group>
         </Form.Row>
         <Form.Row>
-          <Form.Group as={Col} controlId="regPermissions">
-            <Form.Label>Permissions</Form.Label>
-            <Form.Control type="text" disabled>{displayPermissions(localStorage.getItem("permissions"))}</Form.Control>
+          <Form.Group className="col" controlId="regPermissions">
+            <Form.Label>Permissions:</Form.Label>
+            <Form.Control type="text" placeholder={displayPermissions(localStorage.getItem("permissions"))} disabled />
           </Form.Group>
         </Form.Row>
         <Form.Row>
@@ -60,9 +62,9 @@ export default function ProfileView(props) {
             <Button type="submit" variant="primary">Apply changes!</Button>
           </Col>
         </Form.Row>
+        { (props.updated == true && <Alert variant="success" className="mt-3 ml-sm-5 ml-3 mr-sm-5 mr-3 pl-sm-5 pl-3 pr-sm-5 pr-3">Saved!</Alert>) || 
+        (props.updated == false && <Alert variant="danger" className="mt-3 ml-sm-5 ml-3 mr-sm-5 mr-3 pl-sm-5 pl-3 pr-sm-5 pr-3">The settings have not been saved.<br />Reason: {props.reason}</Alert>) }
       </Form>
-      { (props.updated == true && <Alert variant="success" className="mt-3 pl-sm-5 pl-3 pr-sm-5 pr-3">Saved!</Alert>) || 
-      (props.updated == false && <Alert variant="danger" className="mt-3 pl-sm-5 pl-3 pr-sm-5 pr-3">The settings have not been saved.<br />Reason: {props.reason}</Alert>) }
     </>
   );
 };
