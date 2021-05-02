@@ -14,7 +14,7 @@ export default function LoginView(props) {
           </Form.Group>
           <Form.Group controlId="loginFormPassword">
             <Form.Label>Password:</Form.Label>
-            <Form.Control className={style.rectifyFormCtrlItem} type="password" placeholder="E-mail address" required />
+            <Form.Control className={style.rectifyFormCtrlItem} type="password" placeholder="Password" required />
           </Form.Group>
           <Button type="submit" variant="primary">Log in</Button>
         </Form>
