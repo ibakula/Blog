@@ -2,7 +2,6 @@ import { Component, createRef } from 'react';
 import NavigationBarView from '../views/navigation-view';
 import * as navigationApi from '../../api/navigation-api';
 import * as api from '../../api/session-api';
-import { connect } from 'react-redux';
 import { Form, FormControl, Button } from 'react-bootstrap';
 
 class NavigationContainer extends Component {
@@ -37,10 +36,4 @@ class NavigationContainer extends Component {
   }
 };
 
-function mapStateToProps(store) {
-  return {
-    loggedOut: (!store.navigationState.loggedIn)
-  };
-}
-
-export default connect(mapStateToProps)(NavigationContainer);
+export default NavigationContainer;

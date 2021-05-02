@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 // Route-specific layouts
 import Home from '../home';
@@ -13,7 +14,7 @@ import Profile from './profile-layout';
 import Article from './article-layout';
 import * as ErrorLayouts from './404-layout';
 
-export default class MainLayout extends Component {
+class MainLayout extends Component {
   render() {
     return (
       <>
@@ -38,4 +39,12 @@ export default class MainLayout extends Component {
       </>
     );
   }
+};
+
+function mapStateToProps(store) {
+  return {
+    loggedIn: store.navigationState.loggedIn
+  };
 }
+
+export default connect(mapStateToProps)(MainLayout);
