@@ -10,5 +10,5 @@ export default function WelcomeStripeView(props) {
 };
 
 WelcomeStripeView.propTypes = {
-  pageName = PropTypes.string
+  pageName: PropTypes.string
 };
