@@ -22,7 +22,7 @@ export default function LoginView(props) {
           props.success == false && <Alert variant="danger" className="p-4 mt-4 mr-3">Failed to login<br />Reason: {props.reason}</Alert>
         }
         {
-          props.success == true && <Alert variant="success" className="p-4 mt-4 mr-3">You have loggedd in, redirecting...<DeferredRedirect to="/" delay="5000" type={"login"} /></Alert>
+          props.success == true && <Alert variant="success" className="p-4 mt-4 mr-3">You have logged in, redirecting...<DeferredRedirect to="/" delay="5000" type={"login"} /></Alert>
         }
       </Col>
       <Col md={4} className="mt-md-0 mt-4">
