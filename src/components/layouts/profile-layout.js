@@ -6,7 +6,7 @@ export default class Profile extends Component {
   render() {
     return (
       <>
-        <WelcomeStripeContainer />
+        <WelcomeStripeContainer pageName="profile" />
         <ProfileContainer />
       </>
     );
