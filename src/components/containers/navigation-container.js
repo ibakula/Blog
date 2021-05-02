@@ -22,12 +22,12 @@ class NavigationContainer extends Component {
 
   handleLogout(e) {
     e.preventDefault();
-    api.logout();
+    api.logout().then(() => api.updateNavigationBarOnLogout());
   }
 
   render() {
     return (
-      <NavigationBarView onLogout={this.handleLogout} loggedOut={this.props.loggedOut}>
+      <NavigationBarView onLogout={this.handleLogout}>
         <Form inline>
           <FormControl type="text" placeholder="Search" className="mr-sm-2" ref={this.searchFieldRef} onKeyPress={(e) => { if (e.key == 'Enter') { e.preventDefault(); } }} />
           <Button variant="outline-success" onClick={this.handleSearch} className="mt-2 mt-sm-0">Search</Button>

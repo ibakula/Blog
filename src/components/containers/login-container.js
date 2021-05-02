@@ -26,7 +26,7 @@ class LoginContainer extends Component {
     api.login(data)
     .then(data => {
       if (data.result.search(/success/i) != -1) {
-        this.setState({ success: true, reason: data.reason });
+        this.setState({ success: true });
       }
       else {
         this.setState({ success: false, reason: data.reason });

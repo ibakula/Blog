@@ -15,10 +15,7 @@ export function login(userData) {
         return Promise.reject(new Error("Cookie wasn't saved"));
       }
       return updateUserData(data)
-      .then(userData => {
-        store.dispatch(navigationBarActions.loginSuccess());
-        return userData;
-      }); 
+      .then(() => response.data); 
     });
   })
   .catch(error => {
@@ -64,7 +61,6 @@ export function logout() {
       localStorage.removeItem("permissions");
       localStorage.removeItem("login_date");
       localStorage.removeItem("email");
-      store.dispatch(navigationBarActions.logoutSuccess());
     }
     return response.data;
   })
@@ -86,3 +82,11 @@ export function alterUserData(data) {
   })
   .catch(error => Promise.reject(error));
 };
+
+export function updateNavigationBarOnLogin() {
+  store.dispatch(navigationBarActions.loginSuccess());
+}
+
+export function updateNavigationBarOnLogout() {
+  store.dispatch(navigationBarActions.logoutSuccess());
+}
