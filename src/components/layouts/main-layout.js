@@ -14,9 +14,6 @@ import Article from './article-layout';
 import * as ErrorLayouts from './404-layout';
 
 export default class MainLayout extends Component {
-  static propTypes = {  
-  }
-
   render() {
     return (
       <>
