@@ -6,7 +6,7 @@ export default class Profile extends Component {
   render() {
     return (
       <>
-        <WelcomeStripeContainer pageName="profile" />
+        {localStorage.getItem("email") != null && <WelcomeStripeContainer pageName="profile" />}
         <ProfileContainer />
       </>
     );
