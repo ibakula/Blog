@@ -14,7 +14,8 @@ class PopularSectionContainer extends Component {
 
   componentDidUpdate(prevState) {
     if (prevState.articleId != this.props.articleId) {
-      api.getPopularArticles();
+      api.getPopularArticles()
+      .catch(error => error);
     }
   }
 
