@@ -26,8 +26,6 @@ export default function ProfileView(props) {
     );
   }
 
-  console.log(localStorage.getItem("first_name"));
-
   return (
     <>
       <Form onSubmit={props.onSubmit} ref={props.formRef} className={`pt-sm-5 pt-3 pb-sm-5 pb-3 pl-sm-5 pl-3 pr-sm-5 pr-3 ${style.bgLight}`}>

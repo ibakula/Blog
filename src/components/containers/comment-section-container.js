@@ -23,11 +23,16 @@ class CommentSectionContainer extends Component {
       return;
     }
 
-    api.postComment(this.params.articleId, this.dataRef.current.value)
+    /*
+    * The first catch block was put there intentionally
+    * in order to handle types of errors separately from oneanother.
+    */
+    api.postComment(this.props.articleId, this.dataRef.current.value)
     .catch(error => {
       alert(`Posting failed, reason: ${erorr.message}`);
       return Promise.reject(); // Skip updating comments, since it wasn't posted
     })
+    .then(() => this.dataRef.current.value = "")
     .then(() => api.getCommentsCount(this.props.articleId))
     .then(count => api.getComments(this.props.articleId, 0, config.COMMENT_MAX_ITEMS_PER_PAGE, count))
     .catch(error => {
@@ -49,6 +54,7 @@ class CommentSectionContainer extends Component {
   }
 
   render() {
+    console.log(this.props.comments);
     return (
       <CommentSectionView onCommentSubmit={this.handleSubmitComment} 
         textDataRef={this.dataRef}>
