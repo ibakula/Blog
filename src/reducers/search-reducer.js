@@ -7,7 +7,7 @@ const initialState = {
 function reducer(state = initialState, action) {
   switch(action.type) {
     case actionTypes.DISPLAY_RESULTS:
-      return Object.assign({}, state, { results: action.results });
+      return { results: action.results };
     
     case actionTypes.INIT_SEARCH_FN:
       return initialState;
