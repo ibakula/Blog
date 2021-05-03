@@ -17,7 +17,8 @@ class SearchContainer extends Component {
   componentDidUpdate(prevProps) {
     if (this.state.init && 
       ((prevProps.results.length == 0 && 
-      this.props.results.length == 0) || 
+      this.props.results.length == 0 && 
+      this.props.results != prevProps.results) || 
       this.props.results != prevProps.results)) {
       this.setState({ init: false });
     }
