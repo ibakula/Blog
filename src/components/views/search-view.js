@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default function SearchView(props) {
   return (
     <>
-      {props.results.length == 0 && <div class="m-3">Sorry, no matches have been found for your inquiry.</div>}
+      {props.results.length == 0 && <div class="m-4">Sorry, no matches have been found for your inquiry.</div>}
       <div class="m-4">
         <Link to="/profile/5"><h4 class="display-5">Test Test</h4></Link>
         <p class="lead">User profile</p>
