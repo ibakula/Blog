@@ -1,0 +1,13 @@
+.title {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 15em;
+}
+
+.text {
+  overflow: hidden;
+  max-width: 50em;
+  max-height: 2.9em;
+  word-break: break-all;
+}
