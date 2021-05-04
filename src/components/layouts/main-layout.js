@@ -31,7 +31,7 @@ class MainLayout extends Component {
           <Route exact path="/profile" component={Profile}>
             {localStorage.getItem("email") == null && <Redirect to="/404" />}
           </Route>
-          <Route path="/search" component={Search} />
+          <Route exact path="/search" component={Search} />
           <Route path="/profile/:userId(\d+)" component={Profile} />
           <Route exact path="/404" component={ErrorLayouts.PageNotFound} />
           <Route path="/article/:articleId(\d+)" component={Article} />
