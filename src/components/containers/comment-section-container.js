@@ -54,7 +54,6 @@ class CommentSectionContainer extends Component {
   }
 
   render() {
-    console.log(this.props.comments);
     return (
       <CommentSectionView onCommentSubmit={this.handleSubmitComment} 
         textDataRef={this.dataRef}>
