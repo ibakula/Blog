@@ -4,7 +4,7 @@ import GeneratedListView from '../views/generated-list-view';
 export default class GeneratedListContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { loadedItemsCount: 0 };
+    this.state = { loadedItemsCount: (this.props.count != null ? this.props.count : 0) };
     this.handleShowNextList = this.handleShowNextList.bind(this);
     this.handleShowPreviousList = this.handleShowPreviousList.bind(this);
   }
