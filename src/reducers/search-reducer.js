@@ -1,15 +1,16 @@
 import * as actionTypes from '../actions/action-types';
 
 const initialState = {
+  total: 0,
   results: []
 };
 
 function reducer(state = initialState, action) {
   switch(action.type) {
-    case actionTypes.DISPLAY_RESULTS:
-      return { results: action.results };
+    case actionTypes.UPDATE_SEARCH_RESULTS_SUCCESS:
+      return { total: action.total, results: action.results };
     
-    case actionTypes.INIT_SEARCH_FN:
+    case actionTypes.UPDATE_SEARCH_RESULTS_FAIL:
       return initialState;
   }
 

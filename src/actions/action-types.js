@@ -28,8 +28,8 @@ export const UPDATE_CAROUSEL_SUCCESS = "UPDATE_CAROUSEL_SUCCESS";
 export const UPDATE_CAROUSEL_FAIL = "UPDATE_CAROUSEL_FAIL";
 
 // Search function actions (Navigation bar)
-export const INIT_SEARCH_FN = "INIT_SEARCH_FN";
-export const DISPLAY_RESULTS = "DISPLAY_RESULTS";
+export const UPDATE_SEARCH_RESULTS_FAIL = "UPDATE_SEARCH_RESULTS_FAIL";
+export const UPDATE_SEARCH_RESULTS_SUCCESS = "UPDATE_SEARCH_RESULTS_SUCCESS";
 
 // Login/Logout component actions
 export const LOGIN = "LOGIN";

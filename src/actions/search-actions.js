@@ -1,14 +1,15 @@
 import * as actions from './action-types';
 
-export function displayResults(results) {
+export function getSearchResultsSuccess(results, totalCount) {
   return {
-    type: actions.DISPLAY_RESULTS,
+    type: actions.UPDATE_SEARCH_RESULTS_SUCCESS,
+    total: totalCount,
     results
   }
 };
 
-export function initSearch() {
+export function getSearchResultsFail() {
   return {
-    type: actions.INIT_SEARCH_FN
+    type: actions.UPDATE_SEARCH_RESULTS_FAIL
   }
 };
