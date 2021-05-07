@@ -3,7 +3,7 @@ import * as actions from '../actions/search-actions';
 import store from '../store';
 
 export function getTermsCount(sectionName, term) {
-  return utility.getDataForContainerType(`/api`, `${sectionName}/search`, '/1/count')
+  return utility.postData(`/api/${sectionName}/search/1/count`, term)
   .then(({ data }) => {
     return data.count;
   })
