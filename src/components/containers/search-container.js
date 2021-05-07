@@ -1,9 +1,9 @@
 import { Component } from 'react';
+import * as config from './container-config';
 import SearchView from '../views/search-view';
 import CommentButtons from '../views/generated-list-buttons-view';
 import GeneratedListContainer from './generated-list-container';
-import * as navigationApi from '../../api/navigation-api';
-import store from '../../store';
+import * as api from '../../api/navigation-api';
 import { connect } from 'react-redux';
 
 class SearchContainer extends Component {
@@ -13,8 +13,35 @@ class SearchContainer extends Component {
     this.handleLoadMore = this.handleLoadMore.bind(this);
   }
 
-  handleLoadMore(id, type = 'fromId') {
+  handleLoadMore(id) {
+    
+  }
 
+  loadInitialData() {
+    const params = new URLSearchParams(this.props.location.search);
+    const data = { term: params.get("term") };
+    const results = [];
+    let total = 0;
+    api.getTermsResultsCount('posts', data)
+    .then(count => { 
+      total += count; 
+      return api.searchForTerm('posts', params, 1, config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE); 
+    })
+    .then(data => results.push(data))
+    .then(() => api.getTermsResultsCount('users', data))
+    .then(count => { 
+      total += count;
+      return api.searchForTerm('users', params, 1, config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE, count); 
+    })
+    .then(data => results.push(data))
+    .then(() => api.updateSearchResultsState(results, total))
+    .catch(error => {
+      if (this.props.results.length > 0) {
+        api.updateSearchResultsState(null, 0, 2);
+        return;
+      }
+      this.setState({ init: false });
+    });
   }
 
   componentDidMount() {
@@ -22,7 +49,8 @@ class SearchContainer extends Component {
       this.setState({ init: false });
       return;
     }
-    store.dispatch({type:"DISPLAY_RESULTS", results: [{first_name:"test", last_name:"test"}, {first_name:"intro", last_name:"duction"}, {title:"No title", text:"no text"}, {title:"untitled", text:"leep sadas"}]});
+
+    this.loadInitialData();
   }
 
   componentDidUpdate(prevProps) {
@@ -37,10 +65,10 @@ class SearchContainer extends Component {
     if (!this.state.init && 
       prevProps.location.search != this.props.location.search) {
       if (this.props.location.search.length > 6) {
-        store.dispatch({type:"DISPLAY_RESULTS", results: [{first_name:"one", last_name:"two"}, {first_name:"three", last_name:"four"}, {first_name:"five", last_name:"six"}]});
+        this.loadInitialData();
       }
       else {
-        store.dispatch({type:"DISPLAY_RESULTS", results: []});
+        api.updateSearchResultsState(null, 0, 2);
       }
       this.setState({ init: true });
     }
@@ -53,6 +81,7 @@ class SearchContainer extends Component {
       );
     }
     
+    // todo: add another check, hint at count property of a child 
     if (this.props.results.length == 0) {
       return (
         <div class="m-4"><p class="lead">Sorry, no matches have been found for your inquiry.</p></div>
@@ -61,8 +90,8 @@ class SearchContainer extends Component {
 
     return (
       <>
-        <GeneratedListContainer count={this.props.results.length}
-          maxItemsPerPage= {10}
+        <GeneratedListContainer count={this.props.total}
+          maxItemsPerPage={config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE}
           originData={this.props.results}
           viewElement={SearchView}
           controlElement={CommentButtons} 
@@ -74,6 +103,7 @@ class SearchContainer extends Component {
 
 function mapStateToProps(store) {
   return {
+    total: store.searchState.total,
     results: store.searchState.results
   };
 }

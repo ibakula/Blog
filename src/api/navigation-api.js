@@ -2,7 +2,7 @@ import * as utility from './api-utility';
 import * as actions from '../actions/search-actions';
 import store from '../store';
 
-export function getTermsCount(sectionName, term) {
+export function getTermsResultsCount(sectionName, term) {
   return utility.postData(`/api/${sectionName}/search/1/count`, term)
   .then(({ data }) => {
     return data.count;
@@ -12,14 +12,17 @@ export function getTermsCount(sectionName, term) {
   });
 };
 
-export function searchForTerm(sectionName, term, fromId, resultsCountLimit, currentListItemCount) {
+export function searchForTerm(sectionName, term, fromId, resultsCountLimit) {
   return utility.postData(`/api/${sectionName}/search/${fromId}/${resultsCountLimit}`, term)
   .then(({ data }) => {
-    store.dispatch(actions.getSearchResultsSuccess(data, currentListItemCount));
     return data;
   })
   .catch(error => {
-    // store.dispatch(actions.getSearchResultsFail());
     return Promise.reject(error);
   });
+};
+
+export function updateSearchResultsState(results, total, type = 1) {
+  type == 1 ? store.dispatch(actions.getSearchResultsSuccess(results, total)) :
+  store.dispatch(actions.getSearchResultsFail());
 };
