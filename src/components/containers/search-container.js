@@ -19,21 +19,21 @@ class SearchContainer extends Component {
 
   loadInitialData() {
     const params = new URLSearchParams(this.props.location.search);
-    const data = { term: params.get("term") };
-    const results = [];
+    const postData = { term: params.get("term") };
+    let results = [];
     let total = 0;
-    api.getTermsResultsCount('posts', data)
-    .then(count => { 
-      total += count; 
-      return api.searchForTerm('posts', params, 1, config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE); 
-    })
-    .then(data => results.push(data))
-    .then(() => api.getTermsResultsCount('users', data))
+    api.getTermsResultsCount('posts', postData)
     .then(count => { 
       total += count;
-      return api.searchForTerm('users', params, 1, config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE, count); 
+      return api.searchForTerm('posts', postData, 1, config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE); 
     })
-    .then(data => results.push(data))
+    .then(data => { results = results.concat(data); })
+    .then(() => api.getTermsResultsCount('users', postData))
+    .then(count => { 
+      total += count;
+      return api.searchForTerm('users', postData, 1, config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE); 
+    })
+    .then(data => { results = results.concat(data); })
     .then(() => api.updateSearchResultsState(results, total))
     .catch(error => {
       if (this.props.results.length > 0) {

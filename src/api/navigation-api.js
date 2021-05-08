@@ -3,7 +3,7 @@ import * as actions from '../actions/search-actions';
 import store from '../store';
 
 export function getTermsResultsCount(sectionName, term) {
-  return utility.postData(`/api/${sectionName}/search/1/count`, term)
+  return utility.postData(`http://127.0.0.1:80/api/${sectionName}/search/1/count`, term)
   .then(({ data }) => {
     return data.count;
   })
@@ -13,7 +13,7 @@ export function getTermsResultsCount(sectionName, term) {
 };
 
 export function searchForTerm(sectionName, term, fromId, resultsCountLimit) {
-  return utility.postData(`/api/${sectionName}/search/${fromId}/${resultsCountLimit}`, term)
+  return utility.postData(`http://127.0.0.1:80/api/${sectionName}/search/${fromId}/${resultsCountLimit}`, term)
   .then(({ data }) => {
     return data;
   })

@@ -9,7 +9,7 @@ export default function SearchView(props) {
         <p class="lead">User profile</p>
       </div>}
       {'title' in props.item && <div class="m-4">
-        <Link to="/article/5"><h4 class={`${style.title} display-5`}>{props.item.title.length > 10 ? (props.item.title.slice(0, 10) + "...") : props.item.title}</h4></Link>
+        <Link to="/article/5"><h4 class={`${style.title} display-5`}>{props.item.title.length > 25 ? (props.item.title.slice(0, 25) + "...") : props.item.title}</h4></Link>
         <p class={`${style.text} lead`}>{props.item.text.length > 90 ? (props.item.text.slice(0, 90) + "...") : props.item.text}</p>
         <p class="lead">An article</p>
       </div>}
