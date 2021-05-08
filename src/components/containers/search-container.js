@@ -43,11 +43,6 @@ class SearchContainer extends Component {
     })
     .then(data => { results = results.concat(data); })
     .then(() => {
-      if (results.length == 0 && 
-        this.props.results.length == 0 &&
-        this.state.init) {
-        this.setState({ init: false });
-      } 
       api.updateSearchResultsState(results, total)
     })
     .catch(error => {
