@@ -25,7 +25,7 @@ class SearchContainer extends Component {
     api.getTermsResultsCount('posts', postData)
     .then(count => { 
       total += count;
-      return api.searchForTerm('posts', postData, 1, config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE); 
+      return api.searchForTerm('posts', postData, 'fromId', 1, config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE); 
     })
     .then(data => { results = results.concat(data); })
     .then(() => {
@@ -39,7 +39,7 @@ class SearchContainer extends Component {
         return [];
       }
       total += count;
-      return api.searchForTerm('users', postData, 1, config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE); 
+      return api.searchForTerm('users', postData, 'fromId', 1, config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE); 
     })
     .then(data => { results = results.concat(data); })
     .then(() => {
