@@ -28,13 +28,28 @@ class SearchContainer extends Component {
       return api.searchForTerm('posts', postData, 1, config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE); 
     })
     .then(data => { results = results.concat(data); })
-    .then(() => api.getTermsResultsCount('users', postData))
+    .then(() => {
+      if (total >= config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE) {
+        return 0;
+      }
+      return api.getTermsResultsCount('users', postData); 
+    })
     .then(count => { 
+      if (count == 0) {
+        return [];
+      }
       total += count;
       return api.searchForTerm('users', postData, 1, config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE); 
     })
     .then(data => { results = results.concat(data); })
-    .then(() => api.updateSearchResultsState(results, total))
+    .then(() => {
+      if (results.length == 0 && 
+        this.props.results.length == 0 &&
+        this.state.init) {
+        this.setState({ init: false });
+      } 
+      api.updateSearchResultsState(results, total)
+    })
     .catch(error => {
       if (this.props.results.length > 0) {
         api.updateSearchResultsState(null, 0, 2);
