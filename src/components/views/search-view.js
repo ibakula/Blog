@@ -5,7 +5,7 @@ export default function SearchView(props) {
   return (
     <>
       {'first_name' in props.item && <div class="m-4">
-        <Link to="/profile/5"><h4 class="display-5">{`${props.item.first_name} ${props.item.last_name}`}</h4></Link>
+        <Link to="/profile/${props.item.id}"><h4 class="display-5">{`${props.item.first_name} ${props.item.last_name}`}</h4></Link>
         <p class="lead">User profile</p>
       </div>}
       {'title' in props.item && <div class="m-4">
