@@ -16,8 +16,8 @@ export default class GeneratedListContainer extends Component {
     let loadItems = this.state.loadedItemsCount + this.props.maxItemsPerPage;
     loadItems > this.props.count ? loadItems = this.props.count : loadItems;
     if (loadItems <= this.props.count) {
-      let id = loadItems == 0 ? 0 : this.props.originData[this.props.originData.length-1].id;
-      this.props.loadMore(id, 'toId')
+      let id = loadItems == 0 ? 0 : this.props.originData[0].id;
+      this.props.loadMore(id, 'fromId')
       .then(() => {
         this.setState({ loadedItemsCount: loadItems }); 
       })
@@ -35,8 +35,8 @@ export default class GeneratedListContainer extends Component {
     loadItems < 0 ? loadItems = 0 : loadItems;
 
     if (loadItems <= this.props.count) {
-      let id = loadItems == 0 ? 0 : this.props.originData[0].id;
-      this.props.loadMore(id, 'fromId')
+      let id = loadItems == 0 ? 0 : this.props.originData[(this.props.originData.length-1)].id;
+      this.props.loadMore(id, 'toId')
       .then(() => {
         this.setState({ loadedItemsCount: loadItems }); 
       })

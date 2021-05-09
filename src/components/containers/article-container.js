@@ -22,10 +22,12 @@ class ArticleContainer extends Component {
     if (prevState.articleId == this.props.articleId) {
       return;
     }
-    this.setState({ hasLoaded: false });
-    api.getArticles(this.props.articleId)
-    .finally(() => {
-      this.setState({ hasLoaded: true });
+    Promise.resolve(this.setState({ hasLoaded: false }))
+    .then(() => {
+      return api.getArticles(this.props.articleId)
+      .finally(() => {
+        this.setState({ hasLoaded: true });
+      })
     });
   }
 

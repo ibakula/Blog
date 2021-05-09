@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import * as config from './container-config';
 import SearchView from '../views/search-view';
-import CommentButtons from '../views/generated-list-buttons-view';
+import SearchButtonsView from '../views/search-buttons-view';
 import GeneratedListContainer from './generated-list-container';
 import * as api from '../../api/navigation-api';
 import { connect } from 'react-redux';
@@ -9,12 +9,63 @@ import { connect } from 'react-redux';
 class SearchContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { init: true };
+    this.state = { init: true, firstUserId: 1 };
     this.handleLoadMore = this.handleLoadMore.bind(this);
+    this.loadInitialData = this.loadInitialData.bind(this);
   }
 
-  handleLoadMore(id) {
-    
+  handleLoadMore(id, type = 'fromId') {
+    let id2 = id;
+    if (type == 'fromId' && 
+      'first_name' in this.props.results[0] &&
+      this.state.firstUserId == id) {
+      id2 = 0;
+    }
+
+    let urlParams = new URLSearchParams(this.props.location.search);
+    let termData = { term: urlParams.get("term") };
+    let results = [];
+    let total = 0;
+
+    return api.getTermsResultsCount('posts', termData)
+    .then(count => {
+      if (count == 0) {
+        return [];
+      }
+      total += count;
+      return api.searchForTerm('posts', termData, type, id2, config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE);
+    })
+    .then(data => {
+      results = results.concat(data);
+      if (type == 'fromId') {
+        results = results.reverse();
+      }
+
+      return api.getTermsResultsCount('users', termData);
+    })
+    .then(count => {
+      if (count == 0) {
+        return [];
+      }
+      total += count;
+
+      if (results.length >= config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE) {
+        return [];
+      }
+      return api.searchForTerm('users', termData, 'fromId', 1, (config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE - results.length));
+    })
+    .then(data => {
+      results = results.concat(data);
+      api.updateSearchResultsState(results, total);
+    })
+    .catch(error => {
+      console.log("probs");
+      if (this.props.results.length > 0) {
+        api.updateSearchResultsState(null, 0, 2);
+        return;
+      }
+      this.setState({ init: false });
+    });
   }
 
   loadInitialData() {
@@ -23,27 +74,38 @@ class SearchContainer extends Component {
     let results = [];
     let total = 0;
     api.getTermsResultsCount('posts', postData)
-    .then(count => { 
-      total += count;
-      return api.searchForTerm('posts', postData, 'fromId', 1, config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE); 
-    })
-    .then(data => { results = results.concat(data); })
-    .then(() => {
-      if (total >= config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE) {
-        return 0;
-      }
-      return api.getTermsResultsCount('users', postData); 
-    })
-    .then(count => { 
+    .then(count => {
       if (count == 0) {
         return [];
       }
       total += count;
-      return api.searchForTerm('users', postData, 'fromId', 1, config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE); 
+      return api.searchForTerm('posts', postData, 'none', 1, config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE); 
     })
-    .then(data => { results = results.concat(data); })
+    .then(data => {
+      results = results.concat(data);
+    })
     .then(() => {
-      api.updateSearchResultsState(results, total)
+      return api.getTermsResultsCount('users', postData); 
+    })
+    .then(count => {
+      if (count == 0) {
+        return [];
+      }
+      total += count;
+
+      if (results.length >= config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE) {
+        return [];
+      }
+      return api.searchForTerm('users', postData, 'none', 1, (config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE - results.length)); 
+    })
+    .then(data => {
+      results = results.concat(data);
+      if (data.length > 0) {
+        this.setState({ firstUserId: data[0].id });
+      }
+    })
+    .then(() => {
+      api.updateSearchResultsState(results, total);
     })
     .catch(error => {
       if (this.props.results.length > 0) {
@@ -104,7 +166,7 @@ class SearchContainer extends Component {
           maxItemsPerPage={config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE}
           originData={this.props.results}
           viewElement={SearchView}
-          controlElement={CommentButtons} 
+          controlElement={SearchButtonsView} 
           loadMore={this.handleLoadMore} />
       </>
     );

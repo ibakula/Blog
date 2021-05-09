@@ -16,8 +16,6 @@ export function getDataForContainerType(url, sectionName, ...params) {
 
 export function postData(url, data) {
   const params = new URLSearchParams();
-
-  console.log(data);
   
   for (const name in data) {
     params.append(name, data[name]);

@@ -13,11 +13,16 @@ export function getTermsResultsCount(sectionName, term) {
 };
 
 export function searchForTerm(sectionName, term, type, id, resultsCountLimit) {
-  if (type != 'fromId' || type != 'toId') {
+  if (type != 'fromId' && type != 'toId' && type != 'none') {
     return Promise.reject(new Error("Search type parameter should either be to-or -fromId"));
   }
 
-  return utility.postData(`http://127.0.0.1:80/api/${sectionName}/search/${type}/${id}/${resultsCountLimit}`, term)
+  let url = `http://127.0.0.1:80/api/${sectionName}/search/${type}/${id}/${resultsCountLimit}`;
+  if (type == 'none') {
+    url = `http://127.0.0.1:80/api/${sectionName}/search`;
+  }
+
+  return utility.postData(url, term)
   .then(({ data }) => {
     return data;
   })

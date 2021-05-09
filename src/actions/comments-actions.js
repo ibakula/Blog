@@ -8,7 +8,7 @@ export function getCommentsSuccess(comments, count) {
   };
 };
 
-export function insertComment(commentField) {
+export function insertComment(comment) {
   return {
     type: action.UPDATE_COMMENTS_INSERT,
     comment

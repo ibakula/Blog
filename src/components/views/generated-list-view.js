@@ -34,7 +34,7 @@ export default function GeneratedListView(props) {
     <>
     {
       mutedData.map((item, index) => {
-        return ('showBoth' in item ? <ControlElement key="Controls" item={item} /> : <Element key={index} item={item} />);
+        return ('showBoth' in item ? <ControlElement key="Controls" item={item} /> : <Element key={('date' in item ? `${item.id}_${item.date}` : item.id)} item={item} />);
       })
     }
     </>
