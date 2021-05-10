@@ -9,65 +9,30 @@ import { connect } from 'react-redux';
 class SearchContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { init: true, firstUserId: 1 };
+    this.state = { init: true };
     this.handleLoadMore = this.handleLoadMore.bind(this);
     this.loadInitialData = this.loadInitialData.bind(this);
   }
 
   handleLoadMore(id, type = 'fromId') {
-    let id2 = id;
-    if (type == 'fromId' && 
-      'first_name' in this.props.results[0] &&
-      this.state.firstUserId == id) {
-      id2 = 0;
-    }
-
-    let sectionName = 'posts';
-    for (const item of this.props.results) {
-      if ('first_name' in item && item.id == id2) {
-        sectionName = 'users';
-        break;
-      }
-    }
-
     let urlParams = new URLSearchParams(this.props.location.search);
     let termData = { term: urlParams.get("term") };
     let results = [];
     let total = 0;
 
-    return api.getTermsResultsCount(sectionName, termData)
+    return api.getTermsResultsCount('posts', termData)
     .then(count => {
       if (count == 0) {
         return [];
       }
       total += count;
-      return api.searchForTerm(sectionName, termData, type, id2, config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE);
+      return api.searchForTerm('posts', termData, type, id, config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE);
     })
     .then(data => {
       results = results.concat(data);
-
-      return api.getTermsResultsCount((sectionName == 'users' ? 'posts' : 'users'), termData);
-    })
-    .then(count => {
-      if (count == 0) {
-        return [];
-      }
-      total += count;
-
-      if (results.length >= config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE || sectionName == 'users') {
-        return [];
-      }
-      return api.searchForTerm('users', termData, 'fromId', 1, (config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE - results.length));
-    })
-    .then(data => {
-      results = results.concat(data);
-      if (data.length > 0) {
-        this.setState({ firstUserId: data[0].id });
-      }
       api.updateSearchResultsState(results, total);
     })
     .catch(error => {
-      console.log("probs");
       if (this.props.results.length > 0) {
         api.updateSearchResultsState(null, 0, 2);
         return;
@@ -81,6 +46,7 @@ class SearchContainer extends Component {
     const postData = { term: params.get("term") };
     let results = [];
     let total = 0;
+
     api.getTermsResultsCount('posts', postData)
     .then(count => {
       if (count == 0) {
@@ -91,28 +57,6 @@ class SearchContainer extends Component {
     })
     .then(data => {
       results = results.concat(data);
-    })
-    .then(() => {
-      return api.getTermsResultsCount('users', postData); 
-    })
-    .then(count => {
-      if (count == 0) {
-        return [];
-      }
-      total += count;
-
-      if (results.length >= config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE) {
-        return [];
-      }
-      return api.searchForTerm('users', postData, 'none', 1, (config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE - results.length)); 
-    })
-    .then(data => {
-      results = results.concat(data);
-      if (data.length > 0) {
-        this.setState({ firstUserId: data[0].id });
-      }
-    })
-    .then(() => {
       api.updateSearchResultsState(results, total);
     })
     .catch(error => {
