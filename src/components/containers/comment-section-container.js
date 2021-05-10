@@ -50,7 +50,7 @@ class CommentSectionContainer extends Component {
 
   componentDidMount() {
     api.getCommentsCount(this.props.articleId)
-    .then(count => api.getComments(this.props.articleId, (count-config.COMMENT_MAX_ITEMS_PER_PAGE), config.COMMENT_MAX_ITEMS_PER_PAGE, count));
+    .then(count => api.getComments(this.props.articleId, 0, config.COMMENT_MAX_ITEMS_PER_PAGE, count, 'fromId'));
   }
 
   render() {

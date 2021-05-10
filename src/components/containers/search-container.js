@@ -22,26 +22,31 @@ class SearchContainer extends Component {
       id2 = 0;
     }
 
+    let sectionName = 'posts';
+    for (const item of this.props.results) {
+      if ('first_name' in item && item.id == id2) {
+        sectionName = 'users';
+        break;
+      }
+    }
+
     let urlParams = new URLSearchParams(this.props.location.search);
     let termData = { term: urlParams.get("term") };
     let results = [];
     let total = 0;
 
-    return api.getTermsResultsCount('posts', termData)
+    return api.getTermsResultsCount(sectionName, termData)
     .then(count => {
       if (count == 0) {
         return [];
       }
       total += count;
-      return api.searchForTerm('posts', termData, type, id2, config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE);
+      return api.searchForTerm(sectionName, termData, type, id2, config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE);
     })
     .then(data => {
       results = results.concat(data);
-      if (type == 'fromId') {
-        results = results.reverse();
-      }
 
-      return api.getTermsResultsCount('users', termData);
+      return api.getTermsResultsCount((sectionName == 'users' ? 'posts' : 'users'), termData);
     })
     .then(count => {
       if (count == 0) {
@@ -49,13 +54,16 @@ class SearchContainer extends Component {
       }
       total += count;
 
-      if (results.length >= config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE) {
+      if (results.length >= config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE || sectionName == 'users') {
         return [];
       }
       return api.searchForTerm('users', termData, 'fromId', 1, (config.SEARCH_RESULTS_MAX_ITEMS_PER_PAGE - results.length));
     })
     .then(data => {
       results = results.concat(data);
+      if (data.length > 0) {
+        this.setState({ firstUserId: data[0].id });
+      }
       api.updateSearchResultsState(results, total);
     })
     .catch(error => {

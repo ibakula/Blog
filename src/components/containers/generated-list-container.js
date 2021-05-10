@@ -52,7 +52,7 @@ export default class GeneratedListContainer extends Component {
     }
 
     if (prevProps.originData.length != this.props.originData.length && this.state.loadedItemsCount == 0) {
-      this.setState({ loadedItemsCount: this.props.originData.length });
+      this.setState({ loadedItemsCount: this.props.count });
     }
   }
 
