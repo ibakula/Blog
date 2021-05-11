@@ -3,7 +3,7 @@ import * as actions from '../actions/search-actions';
 import store from '../store';
 
 export function getTermsResultsCount(sectionName, term) {
-  return utility.postData(`http://127.0.0.1:80/api/${sectionName}/search/count`, term)
+  return utility.postData(`/api/${sectionName}/search/count`, term)
   .then(({ data }) => {
     return data.count;
   })
@@ -17,9 +17,9 @@ export function searchForTerm(sectionName, term, type, id, resultsCountLimit) {
     return Promise.reject(new Error("Search type parameter should either be to-or -fromId"));
   }
 
-  let url = `http://127.0.0.1:80/api/${sectionName}/search/${type}/${id}/${resultsCountLimit}`;
+  let url = `/api/${sectionName}/search/${type}/${id}/${resultsCountLimit}`;
   if (type == 'none') {
-    url = `http://127.0.0.1:80/api/${sectionName}/search`;
+    url = `/api/${sectionName}/search`;
   }
 
   return utility.postData(url, term)

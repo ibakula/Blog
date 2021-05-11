@@ -3,7 +3,7 @@ import * as utility from './api-utility';
 import store from '../store';
 
 export function getPopularArticles() {
-  return utility.getDataForContainerType('http://127.0.0.1:80/api', 'posts/popular')
+  return utility.getDataForContainerType('/api', 'posts/popular')
   .then(response => {
       store.dispatch(actions.getPopularArticlesSuccess(response.data));
       return response.data;

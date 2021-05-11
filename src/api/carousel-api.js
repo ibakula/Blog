@@ -3,11 +3,11 @@ import * as utility from './api-utility';
 import store from '../store';
 
 export function getCarouselData() {
-  return utility.getDataByIdFromApiWrapper('http://127.0.0.1:80/api/posts', null)
-  .then(response => utility.getDataByIdFromApiWrapper('http://127.0.0.1:80/api/posts', response.data.id))
+  return utility.getDataByIdFromApiWrapper('/api/posts', null)
+  .then(response => utility.getDataByIdFromApiWrapper('/api/posts', response.data.id))
   .then(response => {
     if ('category_id' in response.data) {
-      return utility.getDataForContainerType('http://127.0.0.1:80/api', 'posts/recommended', response.data.category_id);
+      return utility.getDataForContainerType('/api', 'posts/recommended', response.data.category_id);
     }
     return response;
   })

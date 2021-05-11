@@ -3,7 +3,7 @@ import * as utility from './api-utility';
 import store from '../store';
 
 export function getArticles(id) {
-  return utility.getDataByIdFromApiWrapper('http://127.0.0.1:80/api/posts', id)
+  return utility.getDataByIdFromApiWrapper('/api/posts', id)
   .then(response => {
     const articles = [];
     if ((Array.isArray(response.data) && response.data.length < 1) 
@@ -53,7 +53,7 @@ function finalizeData(article, fetchAuthor = false) {
   nArticle.text = textData.text;
   delete nArticle.views;
 
-  return (fetchAuthor ? utility.getDataByIdFromApiWrapper('http://127.0.0.1:80/api/users', article.author_id)
+  return (fetchAuthor ? utility.getDataByIdFromApiWrapper('/api/users', article.author_id)
     .then(response => {
       nArticle.author = `${response.data.first_name} ${response.data.last_name}`;
       return nArticle;
@@ -61,11 +61,11 @@ function finalizeData(article, fetchAuthor = false) {
 }
 
 function fetchArticlesFromId(startId) {
-  let state = utility.getDataByIdFromApiWrapper('http://127.0.0.1:80/api/posts', startId);
+  let state = utility.getDataByIdFromApiWrapper('/api/posts', startId);
   let states = [];
   for (let i = startId-1; i > 0 && i > (startId-5); --i) {
     states.push(state);
-    state = state.then(() => utility.getDataByIdFromApiWrapper('http://127.0.0.1:80/api/posts', i));
+    state = state.then(() => utility.getDataByIdFromApiWrapper('/api/posts', i));
   }
 
   return Promise.all(states);

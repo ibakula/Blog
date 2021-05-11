@@ -17,7 +17,7 @@ class SubscriptionContainer extends Component {
       email: this.inputRef.current.value
     };
 
-    api.postData('http://127.0.0.1:80/api/subscription', data)
+    api.postData('/api/subscription', data)
     .then(response => {
       this.setState({ results: response.data });
     })

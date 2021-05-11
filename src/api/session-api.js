@@ -42,7 +42,7 @@ export function updateUserData(data) {
 };
 
 export function createAccount(userData) {
-  return utility.postData('http://127.0.0.1:80/api/users', userData)
+  return utility.postData('/api/users', userData)
   .then(response => {
     return response.data;
   })
@@ -52,7 +52,7 @@ export function createAccount(userData) {
 };
 
 export function logout() {
-  return utility.getDataForContainerType("http://127.0.0.1:80/api", "user/logout")
+  return utility.getDataForContainerType("/api", "user/logout")
   .then(response => {
     if (response.data.result.search(/success/i) != -1) {
       localStorage.removeItem("id");

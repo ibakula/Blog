@@ -3,7 +3,7 @@ import * as actions from '../actions/comments-actions';
 import store from '../store';
 
 export function getCommentsCount(articleId) {
-  return utility.getDataForContainerType('http://127.0.0.1:80/api', `comments/post/${articleId}/count`)
+  return utility.getDataForContainerType('/api', `comments/post/${articleId}/count`)
   .then(response => {
     return response.data.count;
   })
@@ -14,7 +14,7 @@ export function getCommentsCount(articleId) {
 };
 
 export function getComments(articleId, commentId, limit, commentCount, type = 'fromId') {
-  return utility.getDataForContainerType('http://127.0.0.1:80/api', 'comments/post', articleId, type, commentId, limit)
+  return utility.getDataForContainerType('/api', 'comments/post', articleId, type, commentId, limit)
   .then(({ data }) => {
     let comments = JSON.stringify(data);
     comments = JSON.parse(comments);
@@ -22,14 +22,14 @@ export function getComments(articleId, commentId, limit, commentCount, type = 'f
     comments.forEach((comment, index) => {
       if (promise != null) {
         promise = promise.then(() => { 
-          return utility.getDataForContainerType('http://127.0.0.1:80/api', 'users', comment.user_id)
+          return utility.getDataForContainerType('/api', 'users', comment.user_id)
           .then(response => {
             comment.author = `${response.data.first_name} ${response.data.last_name}`;
           }); 
         });
       }
       else {
-        promise = utility.getDataForContainerType('http://127.0.0.1:80/api', 'users', comment.user_id)
+        promise = utility.getDataForContainerType('/api', 'users', comment.user_id)
         .then(response => {
           comment.author = `${response.data.first_name} ${response.data.last_name}`;
         });
@@ -59,7 +59,7 @@ export function postComment(articleId, text) {
     text: text,
   };
 
-  return utility.postData('http://127.0.0.1:80/api/comments', data)
+  return utility.postData('/api/comments', data)
   .then(response => {
     if (response.data.result.search(/failed/i) != -1) {
       const reason = 'reason' in response.data ? response.data.reason : "Reason is unknown.";
