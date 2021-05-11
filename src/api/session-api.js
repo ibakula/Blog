@@ -91,8 +91,8 @@ export function alterUserData(data) {
 
 export function updateNavigationBarOnLogin() {
   store.dispatch(navigationBarActions.loginSuccess());
-}
+};
 
 export function updateNavigationBarOnLogout() {
   store.dispatch(navigationBarActions.logoutSuccess());
-}
+};

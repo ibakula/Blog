@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 // Route-specific layouts
 import Home from '../home';
 
+// Api's
+import * as sessionApi from '../../api/session-api';
+
 // Layout-specific components
 import NavigationBar from '../containers/navigation-container';
 import Footer from '../containers/footer-container';
@@ -15,7 +18,39 @@ import Article from './article-layout';
 import Search from '../containers/search-container';
 import * as ErrorLayouts from './404-layout';
 
+function removeCachedData() {
+  localStorage.removeItem("id");
+  localStorage.removeItem("first_name");
+  localStorage.removeItem("last_name");
+  localStorage.removeItem("permissions");
+  localStorage.removeItem("email");
+  localStorage.removeItem("last_login");
+}
+
 class MainLayout extends Component {
+  componentDidMount() {
+    sessionApi.getUserStatus()
+    .then(data => {
+      if (!('email' in data)) {
+        removeCachedData();
+        sessionApi.updateNavigationBarOnLogout();
+      }
+      else {
+        if (localStorage.getItem("email") != null) {
+          return;
+        }
+        for (const prop in data) {
+          localStorage.setItem(prop, data[prop]);
+        }
+        sessionApi.updateNavigationBarOnLogin();
+      }
+    })
+    .catch(error => {
+      removeCachedData();
+      sessionApi.updateNavigationBarOnLogout();
+    });
+  }
+
   render() {
     return (
       <>
